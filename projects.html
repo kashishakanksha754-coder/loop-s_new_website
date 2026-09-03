@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Case Studies — Loop Methods</title>
+<meta name="description" content="Real problems, real solutions. Case studies across fintech, healthcare, mobility, IoT, and enterprise tooling." />
+<link rel="canonical" href="https://loopmethods.com/projects" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Loop Methods" />
+<meta property="og:title" content="Case Studies — Loop Methods" />
+<meta property="og:description" content="Real problems, real solutions. Case studies across fintech, healthcare, mobility, IoT, and enterprise tooling." />
+<meta property="og:url" content="https://loopmethods.com/projects" />
+<meta property="og:image" content="https://loopmethods.com/assets/og-cover.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Case Studies — Loop Methods" />
+<meta name="twitter:description" content="Real problems, real solutions. Case studies across fintech, healthcare, mobility, IoT, and enterprise tooling." />
+<meta name="twitter:image" content="https://loopmethods.com/assets/og-cover.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="assets/loop-config.js"></script>
+<link rel="stylesheet" href="assets/loop.css" />
+<style>
+  /* Filter bar */
+  .cs-filters { display: flex; gap: 0.6rem; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none; padding-bottom: 2px; }
+  .cs-filters::-webkit-scrollbar { display: none; }
+  .cs-filter { flex-shrink: 0; white-space: nowrap; border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.75); border-radius: 9999px; padding: 0.55rem 1.15rem; font-size: 0.82rem; transition: background-color 0.25s ease-out, color 0.25s ease-out, border-color 0.25s ease-out; cursor: pointer; }
+  .cs-filter:hover { color: #fff; border-color: rgba(255,255,255,0.28); }
+  .cs-filter.active { background: #4FA8FF; border-color: #4FA8FF; color: #06070a; font-weight: 600; }
+
+  /* Uniform 3-col grid — every card identical size */
+  .cs-grid { display: grid; grid-template-columns: 1fr; gap: 1.4rem; }
+  @media (min-width: 640px) { .cs-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .cs-grid { grid-template-columns: repeat(3, 1fr); } }
+  .cs-card { transition: opacity 0.4s cubic-bezier(0.22,1,0.36,1), transform 0.4s cubic-bezier(0.22,1,0.36,1); height: 100%; }
+  .cs-card.hide, .cs-card.cs-hide-initial { opacity: 0; transform: scale(0.94); position: absolute; pointer-events: none; height: 0; overflow: hidden; margin: 0; visibility: hidden; }
+  @media (prefers-reduced-motion: reduce) { .cs-card { transition: none; } }
+
+  .cs-card-inner { position: relative; height: 100%; display: flex; flex-direction: column; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #0b0d12; transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease-out, border-color 0.35s ease-out; }
+  .cs-card-inner:hover { transform: translateY(-4px); border-color: rgba(79,168,255,0.4); box-shadow: 0 26px 60px -22px rgba(79,168,255,0.28); }
+  .cs-media { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+  .cs-img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) brightness(0.75) saturate(0.9); transition: filter 0.45s ease-out, transform 0.45s cubic-bezier(0.22,1,0.36,1); }
+  @media (hover: hover) and (pointer: fine) { .cs-card-inner:hover .cs-img { filter: grayscale(0) brightness(0.95) saturate(1.05); transform: scale(1.045); } }
+  @media (hover: none) { .cs-img { filter: grayscale(0) brightness(0.95) saturate(1.05); } }
+  .cs-media-fade { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, rgba(0,0,0,0.55), transparent 55%); }
+  .cs-cat { position: absolute; top: 1rem; left: 1rem; z-index: 2; font-size: 0.66rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.18); border-radius: 9999px; padding: 0.32rem 0.7rem; backdrop-filter: blur(6px); }
+  .cs-view-btn { position: absolute; left: 1.15rem; bottom: 1rem; z-index: 2; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 500; color: #fff; opacity: 0; transform: translateY(10px); transition: opacity 0.22s ease-out, transform 0.22s ease-out; }
+  .cs-card-inner:hover .cs-view-btn { opacity: 1; transform: translateY(0); }
+  @media (hover: none) { .cs-view-btn { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .cs-view-btn, .cs-img { transition: none; } }
+  .cs-body { flex: 1; display: flex; flex-direction: column; padding: 1.25rem 1.35rem 1.4rem; }
+  .cs-title { font-size: 1.05rem; font-weight: 600; color: #fff; letter-spacing: -0.01em; }
+  .cs-desc { margin-top: 0.4rem; font-size: 0.84rem; color: rgba(255,255,255,0.65); line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+  /* Load more */
+  .cs-load-more { display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.03); color: #fff; border-radius: 9999px; padding: 0.75rem 1.6rem; font-size: 0.88rem; font-weight: 500; transition: border-color 0.25s ease-out, background-color 0.25s ease-out; }
+  .cs-load-more:hover { border-color: rgba(79,168,255,0.5); background: rgba(79,168,255,0.08); }
+  .cs-load-more:disabled { opacity: 0.4; pointer-events: none; }
+
+</style>
+</head>
+<body class="font-sans text-white/80 antialiased bg-black">
+
+<!-- ====================================================================
+     NAV  (shared block — reused byte-for-byte on every page)
+     ==================================================================== -->
+<header class="sticky top-0 z-50 border-b border-gray-800/60 bg-black/70 backdrop-blur-xl">
+  <div class="max-w-7xl mx-auto px-6 md:px-8 h-16 flex items-center justify-between gap-4">
+    <a href="./" class="flex items-center shrink-0 transition-opacity duration-300 hover:opacity-80">
+      <img src="assets/loop-logo-v2.png" alt="Loop Methods" class="h-8 md:h-9 w-auto" />
+    </a>
+    <nav class="hidden lg:flex items-center gap-1 rounded-full border border-gray-700 px-2 py-1.5">
+      <a href="./" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Home</a>
+      <a href="about" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">About</a>
+      <a href="services" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Services</a>
+      <a href="projects" class="px-4 py-1.5 rounded-full text-sm text-white bg-white/10 transition-colors duration-200">Case Studies</a>
+      <a href="career" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Career</a>
+    </nav>
+    <a href="#contact" class="hidden lg:inline-flex group items-center gap-2 rounded-full bg-accent text-white px-5 py-2.5 text-sm font-medium hover:brightness-110 transition-all duration-300 shrink-0">
+      Get in Touch
+      <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <button data-menu-toggle aria-expanded="false" aria-label="Open menu" class="lg:hidden grid place-items-center w-10 h-10 rounded-full border border-gray-700 text-white/80 hover:text-white transition-colors">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div data-mobile-menu class="mobile-menu lg:hidden border-t border-gray-800/60 bg-black/95 backdrop-blur-xl">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex flex-col">
+      <a href="./" class="py-3 text-base text-white/80 hover:text-white border-b border-gray-800/60 transition-colors">Home</a>
+      <a href="about" class="py-3 text-base text-white/80 hover:text-white border-b border-gray-800/60 transition-colors">About</a>
+      <a href="services" class="py-3 text-base text-white/80 hover:text-white border-b border-gray-800/60 transition-colors">Services</a>
+      <a href="projects" class="py-3 text-base text-white border-b border-gray-800/60">Case Studies</a>
+      <a href="career" class="py-3 text-base text-white/80 hover:text-white border-b border-gray-800/60 transition-colors">Career</a>
+      <a href="#contact" class="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-accent text-white px-5 py-3 text-sm font-medium">Get in Touch</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= HEADER (bottom radial glow — same mechanic as About) ================= -->
+  <section class="page-hero relative overflow-hidden bg-black">
+    <div class="page-hero-glow" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute inset-0 z-[1]" style="background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 64px 64px;"></div>
+    <div class="relative z-10 max-w-3xl mx-auto px-6 md:px-8 pt-24 pb-16 md:pt-28 md:pb-20 text-center">
+      <span class="reveal page-hero-badge">Our work</span>
+      <h1 class="reveal mt-7 text-4xl sm:text-5xl md:text-6xl font-medium tracking-tighter text-white text-balance" style="line-height:1.05;">
+        Real Problems,
+        <span class="block shiny-text">Real Solutions.</span>
+      </h1>
+      <p class="reveal mt-6 mx-auto max-w-xl text-sm md:text-base text-white/70 leading-relaxed">
+        Trusted by teams across fintech, healthcare, logistics, and consumer tech. Every engagement ships to production — see what we've built.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= FILTER BAR + GRID ================= -->
+  <section>
+    <div class="max-w-7xl mx-auto px-6 md:px-8 py-4 md:py-6">
+      <div class="cs-filters" data-cs-filters role="tablist" aria-label="Filter case studies by category">
+        <button type="button" class="cs-filter active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button type="button" class="cs-filter" data-filter="ai-hr-tech" role="tab" aria-selected="false">AI &amp; HR Tech</button>
+        <button type="button" class="cs-filter" data-filter="fintech-blockchain" role="tab" aria-selected="false">Fintech &amp; Blockchain</button>
+        <button type="button" class="cs-filter" data-filter="healthcare" role="tab" aria-selected="false">Healthcare</button>
+        <button type="button" class="cs-filter" data-filter="mobility-transport" role="tab" aria-selected="false">Mobility &amp; Transport</button>
+        <button type="button" class="cs-filter" data-filter="ecommerce-marketplace" role="tab" aria-selected="false">E-commerce &amp; Marketplace</button>
+        <button type="button" class="cs-filter" data-filter="iot-smart-infra" role="tab" aria-selected="false">IoT &amp; Smart Infra</button>
+        <button type="button" class="cs-filter" data-filter="enterprise-tools" role="tab" aria-selected="false">Enterprise Tools</button>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 md:px-8 pb-10">
+      <div class="cs-grid" data-cs-grid>
+
+        <div class="cs-card reveal" data-category="ai-hr-tech" data-cs-card tabindex="0" role="button" aria-haspopup="dialog" data-batch="0"
+             data-title="HYRIX AI" data-cat-label="AI &amp; HR Tech"
+             data-desc="An AI-native recruiting platform automating sourcing, screening, and interviewing while keeping recruiters in control at every stage."
+             data-problem="Recruiters spend a lot of time manually screening resumes, conducting interviews, and managing candidates, making hiring slow and difficult to scale."
+             data-solution="HYRIX automates the hiring process from candidate sourcing to shortlisting, reducing manual work while keeping human approval throughout the process."
+             data-offers="Automated resume parsing|AI-conducted interviews|Smart candidate scoring|Human approval at every stage">
+          <div class="cs-card-inner">
+            <div class="cs-media">
+              <img class="cs-img" src="assets/hyrix-cover.png" alt="HYRIX AI case study" loading="lazy" />
+              <div class="cs-media-fade"></div>
+              <span class="cs-cat">AI &amp; HR Tech</span>
+              <span class="cs-view-btn" data-cs-open>View Case Study <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+            <div class="cs-body">
+              <h3 class="cs-title">HYRIX AI</h3>
+              <p class="cs-desc">An AI-native recruiting platform automating sourcing, screening, and interviewing while keeping recruiters in control at every stage.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cs-card reveal" data-category="fintech-blockchain" data-cs-card tabindex="0" role="button" aria-haspopup="dialog" data-batch="0"
+             data-title="Trustin Digital Escrow" data-cat-label="Fintech &amp; Blockchain"
+             data-desc="A blockchain-powered PaaS escrow platform on Hyperledger Fabric, ensuring secure, transparent, contract-based transactions."
+             data-problem="Developing a mass-market digital escrow platform from scratch and scaling it into a PaaS solution."
+             data-solution="A secure digital escrow platform with contract-based agreements on Hyperledger Fabric, ensuring transparency and trust."
+             data-offers="Secure fund safeguarding|Contract-based escrow|Built on Hyperledger Fabric|Scalable PaaS solution">
+          <div class="cs-card-inner">
+            <div class="cs-media">
+              <img class="cs-img" src="assets/trustin-cover.png" alt="Trustin Digital Escrow case study" loading="lazy" />
+              <div class="cs-media-fade"></div>
+              <span class="cs-cat">Fintech &amp; Blockchain</span>
+              <span class="cs-view-btn" data-cs-open>View Case Study <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+            <div class="cs-body">
+              <h3 class="cs-title">Trustin Digital Escrow</h3>
+              <p class="cs-desc">A blockchain-powered PaaS escrow platform on Hyperledger Fabric, ensuring secure, transparent, contract-based transactions.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cs-card reveal" data-category="fintech-blockchain" data-cs-card tabindex="0" role="button" aria-haspopup="dialog" data-batch="0"
+             data-title="Savings Oak" data-cat-label="Fintech &amp; Blockchain"
+             data-desc="Revamped enterprise HSA platform with a modern, responsive interface built in Figma and React."
+             data-problem="Outdated frontend and poor user experience due to lack of modern UI and responsive design."
+             data-solution="Designed fresh user journeys in Figma and implemented a responsive UI using React, HTML5, and CSS."
+             data-offers="Enhanced, intuitive interface|Faster, responsive frontend|Seamless enterprise-level navigation|Better user engagement &amp; usability">
+          <div class="cs-card-inner">
+            <div class="cs-media">
+              <img class="cs-img" src="assets/savings-oak-cover.png" alt="Savings Oak case study" loading="lazy" />
+              <div class="cs-media-fade"></div>
+              <span class="cs-cat">Fintech &amp; Blockchain</span>
+              <span class="cs-view-btn" data-cs-open>View Case Study <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+            <div class="cs-body">
+              <h3 class="cs-title">Savings Oak</h3>
+              <p class="cs-desc">Revamped enterprise HSA platform with a modern, responsive interface built in Figma and React.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cs-card reveal" data-category="healthcare" data-cs-card tabindex="0" role="button" aria-haspopup="dialog" data-batch="0"
+             data-title="Poshan Sathi" data-cat-label="Healthcare"
+             data-desc="A digital child nutrition platform helping field teams track growth, flag malnutrition early, and manage nutrition camps."
+             data-problem="Field teams often manage screening, referrals, and camps manually, making high-risk children easy to miss."
+             data-solution="Poshan Sathi digitizes the entire nutrition workflow, giving field staff real-time insights into child health and camp performance."
+             data-offers="Fast child registration|Early malnutrition screening|Camp attendance tracking|Structured follow-up visits">
+          <div class="cs-card-inner">
+            <div class="cs-media">
+              <img class="cs-img" src="assets/poshan-sathi-cover.png" alt="Poshan Sathi case study" loading="lazy" />
+              <div class="cs-media-fade"></div>
+              <span class="cs-cat">Healthcare</span>
+              <span class="cs-view-btn" data-cs-open>View Case Study <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+            <div class="cs-body">
+              <h3 class="cs-title">Poshan Sathi</h3>
+              <p class="cs-desc">A digital child nutrition platform helping field teams track growth, flag malnutrition early, and manage nutrition camps.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cs-card reveal" data-category="enterprise-tools" data-cs-card tabindex="0" role="button" aria-haspopup="dialog" data-batch="0"
+             data-title="Aquira Access" data-cat-label="Accessibility"
+             data-desc="An accessibility platform that scans websites for WCAG issues and delivers clear, actionable fixes teams can implement immediately."
+             data-problem="Many websites have accessibility issues such as poor colour contrast, missing labels, and limited keyboard navigation, making them difficult to use for people with disabilities."
+             data-solution="Aquira simplifies accessibility by scanning websites, identifying risks, prioritising issues, and providing clear fixes that teams can act on quickly."
+             data-offers="Fast accessibility scanning|Actionable, clear fixes|WCAG compliance checks|Progress tracking over time">
+          <div class="cs-card-inner">
+            <div class="cs-media">
+              <img class="cs-img" src="assets/aquira-cover.png" alt="Aquira Access case study" loading="lazy" />
+              <div class="cs-media-fade"></div>
+              <span class="cs-cat">Accessibility</span>
+              <span class="cs-view-btn" data-cs-open>View Case Study <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+            <div class="cs-body">
+              <h3 class="cs-title">Aquira Access</h3>
+              <p class="cs-desc">An accessibility platform that scans websites for WCAG issues and delivers clear, actionable fixes teams can implement immediately.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cs-card reveal" data-category="mobility-transport" data-cs-card tabindex="0" role="button" aria-haspopup="dialog" data-batch="0"
+             data-title="LED 360" data-cat-label="Mobility &amp; Transport"
+             data-desc="An all-in-one roadside assistance platform bringing towing, repairs, and car washes into one seamless app."
+             data-problem="Car owners juggle towing, repairs, and car washes. Finding reliable help takes time, and service quality is unpredictable."
+             data-solution="LED360 makes vehicle assistance simple and stress-free — towing, repairs, and car washes, all in one place."
+             data-offers="Fast &amp; reliable towing|Trusted mechanic connections|Quality car washes anywhere|Flat tire assistance">
+          <div class="cs-card-inner">
+            <div class="cs-media">
+              <img class="cs-img" src="assets/led360-cover.png" alt="LED 360 case study" loading="lazy" />
+              <div class="cs-media-fade"></div>
+              <span class="cs-cat">Mobility &amp; Transport</span>
+              <span class="cs-view-btn" data-cs-open>View Case Study <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+            <div class="cs-body">
+              <h3 class="cs-title">LED 360</h3>
+              <p class="cs-desc">An all-in-one roadside assistance platform bringing towing, repairs, and car washes into one seamless app.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cs-card reveal" data-category="mobility-transport" data-cs-card tabindex="0" role="button" aria-haspopup="dialog" data-batch="1"
+             data-title="Zypps" data-cat-label="Mobility &amp; Transport"
+             data-desc="A ride scheduling app using the GRASP algorithm to optimize driver earnings and minimize empty miles."
+             data-problem="Drivers struggle with maximizing earnings, minimizing empty miles, and reducing wait times between rides."
+             data-solution="Zypps uses the GRASP algorithm to optimize driver scheduling, ensuring better earnings and efficiency."
+             data-offers="Maximized earnings via route optimization|Reduced empty miles|Shorter wait times|Efficient GRASP-based scheduling">
+          <div class="cs-card-inner">
+            <div class="cs-media">
+              <img class="cs-img" src="assets/zypps-cover.png" alt="Zypps case study" loading="lazy" />
+              <div class="cs-media-fade"></div>
+              <span class="cs-cat">Mobility &amp; Transport</span>
+              <span class="cs-view-btn" data-cs-open>View Case Study <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+            <div class="cs-body">
+              <h3 class="cs-title">Zypps</h3>
+              <p class="cs-desc">A ride scheduling app using the GRASP algorithm to optimize driver earnings and minimize empty miles.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cs-card reveal" data-category="mobility-transport" data-cs-card tabindex="0" role="button" aria-haspopup="dialog" data-batch="1"
+             data-title="Jaa Application" data-cat-label="Mobility &amp; Transport"
+             data-desc="An on-demand cab service with intelligent ride allocation for cost-effective, efficient bookings."
+             data-problem="Meeting mobility needs with cost-effective, efficient, and scalable ride-hailing services."
+             data-solution="A mobile app for Android/iOS with real-time ride data and an intelligent allocation algorithm."
+             data-offers="Cost-effective intra/intercity rides|Real-time driver visibility|Intelligent ride allocation|Intuitive, user-friendly interface">
+          <div class="cs-card-inner">
+            <div class="cs-media">
+              <img class="cs-img" src="assets/jaa-cover.png" alt="Jaa Application case study" loading="lazy" />
+              <div class="cs-media-fade"></div>
+              <span class="cs-cat">Mobility &amp; Transport</span>
+              <span class="cs-view-btn" data-cs-open>View Case Study <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+            <div class="cs-body">
+              <h3 class="cs-title">Jaa Application</h3>
+              <p class="cs-desc">An on-demand cab service with intelligent ride allocation for cost-effective, efficient bookings.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cs-card reveal" data-category="mobility-transport" data-cs-card tabindex="0" role="button" aria-haspopup="dialog" data-batch="1"
+             data-title="TaxiSecu" data-cat-label="Mobility &amp; Transport"
+             data-desc="A passenger safety app for Cameroon and Congo with real-time ride tracking and emergency SOS alerts."
+             data-problem="Rising passenger assaults by taxi drivers in regions lacking safe transport alternatives."
+             data-solution="A multi-platform system with real-time monitoring, emergency SOS, and passenger-driver transparency."
+             data-offers="Real-time ride visibility|Emergency alert (SOS) feature|Multi-platform support|Enhanced passenger safety">
+          <div class="cs-card-inner">
+            <div class="cs-media">
+              <img class="cs-img" src="assets/taxisecu-cover.png" alt="TaxiSecu case study" loading="lazy" />
+              <div class="cs-media-fade"></div>
+              <span class="cs-cat">Mobility &amp; Transport</span>
+              <span class="cs-view-btn" data-cs-open>View Case Study <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+            <div class="cs-body">
+              <h3 class="cs-title">TaxiSecu</h3>
+              <p class="cs-desc">A passenger safety app for Cameroon and Congo with real-time ride tracking and emergency SOS alerts.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cs-card reveal" data-category="ecommerce-marketplace" data-cs-card tabindex="0" role="button" aria-haspopup="dialog" data-batch="1"
+             data-title="Rebookit Club" data-cat-label="E-commerce &amp; Marketplace"
+             data-desc="A marketplace connecting book lovers to buy, sell, and discover pre-loved books."
+             data-problem="Many readers have books they no longer use, while others want to discover quality books at affordable prices. There's a need for a simple way to connect both."
+             data-solution="Rebookit provides a convenient marketplace where readers can buy and sell pre-loved books, making reading more affordable while giving unused books a second life."
+             data-offers="Buy affordable pre-loved books|List books with photos &amp; pricing|Direct chat with buyers/sellers|Reader community &amp; recommendations">
+          <div class="cs-card-inner">
+            <div class="cs-media">
+              <img class="cs-img" src="assets/rebookit-cover.png" alt="Rebookit Club case study" loading="lazy" />
+              <div class="cs-media-fade"></div>
+              <span class="cs-cat">E-commerce &amp; Marketplace</span>
+              <span class="cs-view-btn" data-cs-open>View Case Study <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+            <div class="cs-body">
+              <h3 class="cs-title">Rebookit Club</h3>
+              <p class="cs-desc">A marketplace connecting book lovers to buy, sell, and discover pre-loved books.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cs-card reveal" data-category="enterprise-tools" data-cs-card tabindex="0" role="button" aria-haspopup="dialog" data-batch="1"
+             data-title="FrequenC" data-cat-label="Events / Web3"
+             data-desc="A Web 3.0 event platform enabling seamless event creation, blockchain ticketing, and networking."
+             data-problem="Organizing and attending events is tough — organizers face ticketing and engagement issues, attendees lack discovery, and there's no unified event service marketplace."
+             data-solution="FrequenC makes event management seamless with a unified Web 3.0 platform powered by blockchain."
+             data-offers="Easy event creation &amp; ticket sales|Crypto ticketing via MetaMask|Event discovery &amp; networking|Integrated event marketplace">
+          <div class="cs-card-inner">
+            <div class="cs-media">
+              <img class="cs-img" src="assets/frequenc-cover.png" alt="FrequenC case study" loading="lazy" />
+              <div class="cs-media-fade"></div>
+              <span class="cs-cat">Events / Web3</span>
+              <span class="cs-view-btn" data-cs-open>View Case Study <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+            <div class="cs-body">
+              <h3 class="cs-title">FrequenC</h3>
+              <p class="cs-desc">A Web 3.0 event platform enabling seamless event creation, blockchain ticketing, and networking.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cs-card reveal" data-category="ecommerce-marketplace" data-cs-card tabindex="0" role="button" aria-haspopup="dialog" data-batch="1"
+             data-title="Bobbycreation" data-cat-label="E-commerce &amp; Marketplace"
+             data-desc="A secure B2B jewelry app with swipe-based browsing and global wholesale catalog access."
+             data-problem="Showcase jewelry collections globally while restricting competitor access and ensuring a modern, engaging user experience."
+             data-solution="Secure Android/iOS apps with swipe-based navigation, cart, style matching, and a real-time backend dashboard."
+             data-offers="Swipe-based browsing UX|Quote &amp; sample requests|Secure competitor-restricted access|Real-time admin dashboard">
+          <div class="cs-card-inner">
+            <div class="cs-media">
+              <img class="cs-img" src="assets/bobbycreation-cover.png" alt="Bobbycreation case study" loading="lazy" />
+              <div class="cs-media-fade"></div>
+              <span class="cs-cat">E-commerce &amp; Marketplace</span>
+              <span class="cs-view-btn" data-cs-open>View Case Study <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+            <div class="cs-body">
+              <h3 class="cs-title">Bobbycreation</h3>
+              <p class="cs-desc">A secure B2B jewelry app with swipe-based browsing and global wholesale catalog access.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cs-card reveal" data-category="iot-smart-infra" data-cs-card tabindex="0" role="button" aria-haspopup="dialog" data-batch="1"
+             data-title="WLOG" data-cat-label="IoT &amp; Smart Infra"
+             data-desc="A real-time water level forecasting platform helping government teams monitor rivers and respond faster to floods."
+             data-problem="Climate change is making water disasters more frequent and intense, making them harder to predict and manage."
+             data-solution="WLOG makes water disaster management easier by helping teams monitor and respond to risks more effectively."
+             data-offers="Real-time notifications|Accurate multi-station river data|Proactive disaster response|Risk management tools">
+          <div class="cs-card-inner">
+            <div class="cs-media">
+              <img class="cs-img" src="assets/wlog-cover.png" alt="WLOG case study" loading="lazy" />
+              <div class="cs-media-fade"></div>
+              <span class="cs-cat">IoT &amp; Smart Infra</span>
+              <span class="cs-view-btn" data-cs-open>View Case Study <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+            <div class="cs-body">
+              <h3 class="cs-title">WLOG</h3>
+              <p class="cs-desc">A real-time water level forecasting platform helping government teams monitor rivers and respond faster to floods.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="hidden mt-10 text-center text-sm text-white/50" data-cs-empty>No case studies match this filter yet.</p>
+      <div class="mt-12 text-center" data-cs-load-wrap>
+        <button type="button" class="cs-load-more" data-cs-load-more>
+          <span data-cs-load-label>Load more</span>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-cs-load-icon d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA BANNER ================= -->
+  <section>
+    <div class="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-16 lg:py-24">
+      <div class="reveal relative overflow-hidden rounded-3xl border border-gray-700/30 bg-[#0a0a0a] px-6 md:px-16 py-16 md:py-24 text-center" data-cta>
+        <div class="cta-aurora" aria-hidden="true">
+          <div class="cta-parallax" data-cta-parallax>
+            <div class="cta-glow"></div>
+            <div class="cta-orb-wrap">
+              <div class="cta-orb-soft"></div>
+              <div class="cta-orb"></div>
+              <div class="cta-streaks"></div>
+              <div class="cta-sweep"></div>
+            </div>
+          </div>
+        </div>
+        <div class="relative z-10">
+          <h2 class="text-4xl md:text-6xl font-medium tracking-tighter text-white" style="line-height:0.9;">Want results <span class="shiny-text">like these?</span><br />Let's talk.</h2>
+          <p class="mt-6 max-w-xl mx-auto text-sm md:text-base text-white/80 leading-relaxed">Tell us where you're headed. We'll bring the senior team to get you there.</p>
+          <a href="#contact" class="group mt-10 inline-flex items-center gap-2 rounded-full bg-white text-accent px-8 py-4 text-sm font-medium hover:bg-white/90 transition-colors duration-300">
+            Get in Touch
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ====================================================================
+     FOOTER  (shared block — reused byte-for-byte on every page)
+     ==================================================================== -->
+<footer class="border-t border-gray-800/60">
+  <div class="max-w-7xl mx-auto px-6 md:px-8 py-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8">
+      <div class="col-span-2 md:col-span-1">
+        <a href="./" class="inline-flex items-center transition-opacity duration-300 hover:opacity-80">
+          <img src="assets/loop-logo-v2.png" alt="Loop Methods" class="h-11 w-auto" />
+        </a>
+        <p class="mt-5 text-sm text-white/60 leading-relaxed max-w-xs">Quality, Innovation, Perfection,<br />All in one LOOP.</p>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-tight text-white/50 mb-4">Explore</p>
+        <ul class="flex flex-col gap-3 text-sm">
+          <li><a href="./" class="text-white/80 hover:text-white transition-colors">Home</a></li>
+          <li><a href="about" class="text-white/80 hover:text-white transition-colors">About</a></li>
+          <li><a href="services" class="text-white/80 hover:text-white transition-colors">Services</a></li>
+          <li><a href="projects" class="text-white/80 hover:text-white transition-colors">Case Studies</a></li>
+          <li><a href="career" class="text-white/80 hover:text-white transition-colors">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-tight text-white/50 mb-4">Resources</p>
+        <ul class="flex flex-col gap-3 text-sm">
+          <li><a href="#" class="text-white/80 hover:text-white transition-colors">Case Studies</a></li>
+          <li><a href="https://recruit-ai-ochre.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-white/80 hover:text-white transition-colors">HYRIX AI</a></li>
+          <li><a href="privacy-policy" class="text-white/80 hover:text-white transition-colors">Privacy Policy</a></li>
+          <li><a href="terms-of-service" class="text-white/80 hover:text-white transition-colors">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <p class="text-xs uppercase tracking-tight text-white/50 mb-4">Get in touch</p>
+        <address class="not-italic flex flex-col gap-3 text-sm text-white/80">
+          <span class="flex items-start gap-2.5">
+            <svg class="w-4 h-4 mt-0.5 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="leading-relaxed">Dubai, UAE (Al Karama)<br />Noida, India (Sector-127)</span>
+          </span>
+          <a href="tel:+917503596900" class="flex items-center gap-2.5 hover:text-white transition-colors">
+            <svg class="w-4 h-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +91 7503596900
+          </a>
+          <a href="mailto:sales@loopmethods.com" class="flex items-center gap-2.5 hover:text-white transition-colors">
+            <svg class="w-4 h-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+            sales@loopmethods.com
+          </a>
+        </address>
+      </div>
+    </div>
+    <div class="mt-12 pt-8 border-t border-gray-800/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-white/50">© 2026 Loop Methods. All rights reserved.</p>
+      <div class="flex items-center gap-3">
+        <!-- TODO: confirm the official LinkedIn company-page URL -->
+        <a href="https://www.linkedin.com/company/loop-methods/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM2.4 21h5.16V9.75H2.4V21zM9.9 9.75V21h5.16v-6.2c0-1.64.31-3.22 2.34-3.22 2 0 2.03 1.87 2.03 3.32V21h5.16v-7.03c0-4.47-.97-7.5-6.19-7.5-2.51 0-4.19 1.38-4.88 2.68h-.07V9.75H9.9z"/></svg>
+        </a>
+      </div>
+      <p class="text-sm text-white/50">Your Partner in Enterprise Technology.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/loop.js"></script>
+<script>
+(function () {
+  var filters = document.querySelectorAll('[data-cs-filters] .cs-filter');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('[data-cs-card]'));
+  var emptyMsg = document.querySelector('[data-cs-empty]');
+  var loadBtn = document.querySelector('[data-cs-load-more]');
+  var loadWrap = document.querySelector('[data-cs-load-wrap]');
+  var grid = document.querySelector('[data-cs-grid]');
+  var loadLabel = document.querySelector('[data-cs-load-label]');
+  var loadIcon = document.querySelector('[data-cs-load-icon]');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ICON_DOWN = 'M12 5v14M5 12l7 7 7-7';
+  var ICON_UP = 'M12 19V5M5 12l7-7 7 7';
+  var PAGE = 6;    // initial batch
+  var CAP = 13;    // every finished case study is reachable (6 + one "Load more")
+  var currentFilter = 'all';
+  var visibleLimit = PAGE;
+
+  /* Visibility is index-based over the CURRENT filtered subset, not fixed batches:
+     applying a filter resets the count to the first PAGE of that subset. Visible tops out
+     at CAP (12), so the button only ever toggles between Load more and Show less. */
+  function applyState(staggerFrom) {
+    var shownIndex = 0, matchingCount = 0;
+    cards.forEach(function (card) {
+      var matches = currentFilter === 'all' || card.getAttribute('data-category') === currentFilter;
+      if (matches) matchingCount++;
+      var show = matches && shownIndex < visibleLimit;
+      if (matches) shownIndex++;
+      // Stagger only the cards revealed by this click, row by row
+      if (show && typeof staggerFrom === 'number' && shownIndex - 1 >= staggerFrom && !reduceMotion) {
+        var step = Math.floor((shownIndex - 1 - staggerFrom) / 3);
+        card.style.transitionDelay = (step * 0.09) + 's';
+      } else {
+        card.style.transitionDelay = '';
+      }
+      card.classList.toggle('hide', !show);
+    });
+    if (emptyMsg) emptyMsg.classList.toggle('hidden', matchingCount > 0);
+
+    if (loadWrap) {
+      // Hidden entirely when the subset fits in one page — nothing to paginate
+      loadWrap.classList.toggle('hidden', matchingCount <= PAGE);
+      var allShown = visibleLimit >= Math.min(matchingCount, CAP);
+      if (loadLabel) loadLabel.textContent = allShown ? 'Show less' : 'Load more';
+      if (loadIcon) loadIcon.setAttribute('d', allShown ? ICON_UP : ICON_DOWN);
+      if (loadBtn) loadBtn.setAttribute('aria-expanded', allShown ? 'true' : 'false');
+    }
+  }
+
+  filters.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      filters.forEach(function (b) { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+      btn.classList.add('active'); btn.setAttribute('aria-selected', 'true');
+      currentFilter = btn.getAttribute('data-filter');
+      visibleLimit = PAGE;
+      applyState();
+    });
+  });
+
+  if (loadBtn) {
+    loadBtn.addEventListener('click', function () {
+      var matchingCount = cards.filter(function (c) {
+        return currentFilter === 'all' || c.getAttribute('data-category') === currentFilter;
+      }).length;
+      if (visibleLimit >= Math.min(matchingCount, CAP)) {
+        // Show less: collapse back to the first page, then return to the grid top so the
+        // user isn't left staring at empty space where cards just were.
+        visibleLimit = PAGE;
+        applyState();
+        if (grid) {
+          var y = grid.getBoundingClientRect().top + window.pageYOffset - 120;
+          window.scrollTo({ top: y, behavior: reduceMotion ? 'auto' : 'smooth' });
+        }
+      } else {
+        var from = visibleLimit;
+        visibleLimit = Math.min(matchingCount, CAP);
+        applyState(from);
+      }
+    });
+  }
+
+  applyState();
+
+})();
+</script>
+</body>
+</html>
