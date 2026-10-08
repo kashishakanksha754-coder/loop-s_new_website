@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050608">
+<style>html{background:#050608;color-scheme:dark}body{background:#050608}[data-hero-video],.abt-hero video{background:#050608}@view-transition{navigation:auto}::view-transition-group(root){background:#050608}::view-transition-old(root),::view-transition-new(root){animation-duration:200ms;animation-timing-function:ease-out}@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Career — Loop Methods</title>
+<meta name="description" content="Come build something real. Open roles for engineers, designers, and analysts on a senior, distributed team shipping production work." />
+<link rel="canonical" href="https://loopmethods.com/career" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Loop Methods" />
+<meta property="og:title" content="Career — Loop Methods" />
+<meta property="og:description" content="Come build something real. Open roles for engineers, designers, and analysts on a senior, distributed team shipping production work." />
+<meta property="og:url" content="https://loopmethods.com/career" />
+<meta property="og:image" content="https://loopmethods.com/assets/og-cover.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Career — Loop Methods" />
+<meta name="twitter:description" content="Come build something real. Open roles for engineers, designers, and analysts on a senior, distributed team shipping production work." />
+<meta name="twitter:image" content="https://loopmethods.com/assets/og-cover.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/tailwind.css" />
+<link rel="stylesheet" href="assets/loop.css" />
+<link rel="stylesheet" href="assets/consent.css" />
+<style>
+  /* Hero: same mechanic as About — brand-blue radial glow blooming from bottom-center,
+     breathing pulse, dot-grid texture on top, animated shiny-text accent. */
+  .car-hero { min-height: clamp(520px, 70vh, 720px); display: flex; align-items: center; }
+  .car-hero-glow {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(ellipse 85% 55% at 50% 105%, #4FA8FF 0%, rgba(45,90,190,0.55) 30%, rgba(20,40,90,0.22) 55%, transparent 78%);
+    animation: carGlowBreathe 7s ease-in-out infinite;
+  }
+  @keyframes carGlowBreathe { 0%,100% { opacity: 0.85; transform: scale(1); } 50% { opacity: 1; transform: scale(1.03); } }
+  .car-badge {
+    display: inline-flex; align-items: center;
+    border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.03);
+    border-radius: 9999px; padding: 0.4rem 1rem; font-size: 0.7rem;
+    letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.8);
+  }
+  /* Role cards — glass surface, layered glow-ring icon badge, ambient corner wash */
+  .role-card {
+    position: relative; display: flex; flex-direction: column; text-align: left;
+    width: 100%; overflow: hidden;
+    border-radius: 20px; border: 1px solid rgba(255,255,255,0.08);
+    background: #0a0c11; padding: 1.75rem; cursor: pointer;
+    transition: transform 0.28s ease-out, border-color 0.28s ease-out, box-shadow 0.28s ease-out;
+  }
+  .role-card::after {
+    content: ""; position: absolute; width: 60%; aspect-ratio: 1; right: -14%; top: -22%;
+    border-radius: 50%; pointer-events: none;
+    background: radial-gradient(circle, rgba(79,168,255,0.12), transparent 68%);
+    opacity: 0.7; transition: opacity 0.28s ease-out;
+  }
+  .role-card:hover, .role-card:focus-visible {
+    transform: translateY(-4px); border-color: rgba(79,168,255,0.35);
+    box-shadow: 0 18px 44px -22px rgba(79,168,255,0.35);
+    outline: none;
+  }
+  .role-card:hover::after, .role-card:focus-visible::after { opacity: 1.35; }
+  .role-card > * { position: relative; z-index: 1; }
+  .role-icon-wrap { position: relative; width: 52px; height: 52px; }
+  .role-icon-glow {
+    position: absolute; inset: -16px; border-radius: 9999px;
+    background: radial-gradient(circle, rgba(79,168,255,0.16), transparent 70%);
+    transition: opacity 0.28s ease-out, transform 0.28s ease-out;
+  }
+  .role-card:hover .role-icon-glow { opacity: 1.4; transform: scale(1.12); }
+  .role-icon-ring-outer { position: absolute; inset: 0; border-radius: 9999px; border: 1px solid rgba(79,168,255,0.18); }
+  .role-icon-ring-mid { position: absolute; inset: 8px; border-radius: 9999px; border: 1px solid rgba(79,168,255,0.35); }
+  .role-icon {
+    position: absolute; inset: 14px; border-radius: 9999px; display: grid; place-items: center;
+    background: rgba(79,168,255,0.08); color: #4FA8FF;
+  }
+  .role-tag {
+    display: inline-flex; align-items: center;
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 9999px;
+    padding: 0.25rem 0.7rem; font-size: 0.7rem; color: rgba(255,255,255,0.6);
+  }
+  .role-cta { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.875rem; color: rgba(255,255,255,0.8); transition: color 0.25s ease-out; }
+  .role-card:hover .role-cta { color: #fff; }
+  .role-card:hover .role-cta svg { transform: translateX(4px); }
+  .role-cta svg { transition: transform 0.25s ease-out; }
+  /* Role modal — reuses the site's shared .cd-* modal shell */
+  .rm-bullets { display: flex; flex-direction: column; gap: 0.6rem; }
+  .rm-bullets li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.875rem; color: rgba(255,255,255,0.78); line-height: 1.55; }
+  .rm-bullets svg { color: #4FA8FF; flex-shrink: 0; margin-top: 0.2rem; }
+  @media (prefers-reduced-motion: reduce) {
+    .car-hero-glow, .role-icon-glow { animation: none !important; }
+    .role-card, .role-card::after, .role-icon-glow, .role-cta, .role-cta svg { transition: none !important; }
+    .role-card:hover { transform: none !important; }
+  }
+</style>
+</head>
+<body class="font-sans text-white/80 antialiased bg-black">
+
+<!-- ====================================================================
+     NAV  (shared block — reused byte-for-byte on every page)
+     ==================================================================== -->
+<header class="sticky top-0 z-50 border-b border-gray-800/60 bg-black/70 backdrop-blur-xl">
+  <div class="max-w-7xl mx-auto px-6 md:px-8 h-16 flex items-center justify-between gap-4">
+    <a href="./" class="flex items-center shrink-0 transition-opacity duration-300 hover:opacity-80">
+      <img src="assets/loop-logo-v2.png" alt="Loop Methods" class="h-8 md:h-9 w-auto" />
+    </a>
+    <nav class="hidden lg:flex items-center gap-1 rounded-full border border-gray-700 px-2 py-1.5">
+      <a href="./" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Home</a>
+      <a href="about" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">About</a>
+      <a href="services" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Services</a>
+      <a href="projects" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Case Studies</a>
+      <a href="career" class="px-4 py-1.5 rounded-full text-sm text-white bg-white/10 transition-colors duration-200">Career</a>
+    </nav>
+    <a href="#contact" class="hidden lg:inline-flex group items-center gap-2 rounded-full bg-accent text-white px-5 py-2.5 text-sm font-medium hover:brightness-110 transition-all duration-300 shrink-0">
+      Get in Touch
+      <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <button data-menu-toggle aria-expanded="false" aria-label="Open menu" class="lg:hidden grid place-items-center w-10 h-10 rounded-full border border-gray-700 text-white/80 hover:text-white transition-colors">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div data-mobile-menu class="mobile-menu lg:hidden border-t border-gray-800/60 bg-black/95 backdrop-blur-xl">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex flex-col">
+      <a href="./" class="py-3 text-base text-white/80 hover:text-white border-b border-gray-800/60 transition-colors">Home</a>
+      <a href="about" class="py-3 text-base text-white/80 hover:text-white border-b border-gray-800/60 transition-colors">About</a>
+      <a href="services" class="py-3 text-base text-white/80 hover:text-white border-b border-gray-800/60 transition-colors">Services</a>
+      <a href="projects" class="py-3 text-base text-white/80 hover:text-white border-b border-gray-800/60 transition-colors">Case Studies</a>
+      <a href="career" class="py-3 text-base text-white border-b border-gray-800/60">Career</a>
+      <a href="#contact" class="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-accent text-white px-5 py-3 text-sm font-medium">Get in Touch</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= HERO (About-page glow mechanic) ================= -->
+  <section class="car-hero relative overflow-hidden bg-black">
+    <div class="car-hero-glow" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute inset-0 z-[1]" style="background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 64px 64px;"></div>
+    <div class="relative z-10 max-w-3xl mx-auto px-6 md:px-8 pt-24 pb-16 md:pt-28 md:pb-20 text-center">
+      <span class="reveal car-badge">Careers</span>
+      <h1 class="reveal mt-7 text-4xl sm:text-5xl md:text-6xl font-medium tracking-tighter text-white text-balance" style="line-height:1.15;">
+        Come
+        <span class="block shiny-text" style="padding-bottom:0.08em;">Build Something Real.</span>
+      </h1>
+      <p class="reveal mt-6 mx-auto max-w-xl text-sm md:text-base text-white/70 leading-relaxed">
+        We're a senior, distributed team solving real problems with AI, cloud, and mobile technology. If you want to ship production work — not just prototypes — we want to hear from you.
+      </p>
+      <div class="reveal mt-9 flex flex-wrap items-center justify-center gap-3">
+        <a href="#open-roles" class="group inline-flex items-center gap-2 rounded-full bg-accent text-white px-6 py-3 text-sm font-medium hover:brightness-110 transition-all duration-300">
+          See Open Roles
+          <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+        </a>
+        <a href="mailto:careers@loopmethods.com?subject=Resume%20%E2%80%94%20Loop%20Methods" class="group inline-flex items-center gap-2 rounded-full border border-gray-700 px-6 py-3 text-sm font-medium text-white/80 hover:text-white hover:border-gray-600 transition-colors duration-300">
+          Send Your Resume
+          <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHY JOIN LOOP METHODS (quadrant grid — same as Home's Why Loop) ================= -->
+  <section class="relative overflow-hidden">
+    <div class="pointer-events-none absolute inset-0" style="background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 64px 64px; mask-image: radial-gradient(ellipse 80% 100% at 50% 50%, #000 20%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 80% 100% at 50% 50%, #000 20%, transparent 75%);"></div>
+    <div class="relative max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-16 lg:py-24">
+      <div class="reveal max-w-2xl">
+        <p class="text-xs md:text-sm uppercase tracking-tight text-white/80 mb-4">Why join Loop Methods</p>
+        <h2 class="text-3xl md:text-5xl font-medium tracking-tight text-white">Work that ships.</h2>
+      </div>
+      <div class="reveal mt-10 quad rounded-2xl border border-white/10 overflow-hidden">
+        <div class="quad-cell p-7 md:p-9">
+          <div class="quad-icon">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="mt-5 text-lg md:text-xl font-medium text-white tracking-tight">Senior-Led Teams</h3>
+          <p class="mt-3 text-sm text-white/60 leading-relaxed">Work alongside engineers who've shipped production software for two decades, not managers who haven't touched code in years.</p>
+        </div>
+        <div class="quad-cell p-7 md:p-9">
+          <div class="quad-icon">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3 class="mt-5 text-lg md:text-xl font-medium text-white tracking-tight">AI-Accelerated Workflow</h3>
+          <p class="mt-3 text-sm text-white/60 leading-relaxed">Spend your time on architecture and logic — AI handles the boilerplate, so your best thinking goes where it matters.</p>
+        </div>
+        <div class="quad-cell p-7 md:p-9">
+          <div class="quad-icon">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3 class="mt-5 text-lg md:text-xl font-medium text-white tracking-tight">Global Client Exposure</h3>
+          <p class="mt-3 text-sm text-white/60 leading-relaxed">Ship real products for clients across fintech, healthcare, mobility, and more — not internal tools nobody uses.</p>
+        </div>
+        <div class="quad-cell p-7 md:p-9">
+          <div class="quad-icon">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3 class="mt-5 text-lg md:text-xl font-medium text-white tracking-tight">Flexible &amp; Remote-Friendly</h3>
+          <p class="mt-3 text-sm text-white/60 leading-relaxed">Work from Dubai, Noida, or wherever you do your best work — outcomes matter more than hours logged.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= OPEN ROLES ================= -->
+  <section id="open-roles">
+    <div class="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-16 lg:py-24">
+      <div class="reveal max-w-2xl">
+        <p class="text-xs md:text-sm uppercase tracking-tight text-white/80 mb-4">Open roles</p>
+        <h2 class="text-3xl md:text-5xl font-medium tracking-tight text-white">Where you could fit in.</h2>
+        <p class="mt-5 text-sm md:text-base text-white/70 leading-relaxed">Six teams hiring right now. Don't see your exact role? Send us your resume anyway.</p>
+      </div>
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <button type="button" class="role-card reveal" data-role-trigger
+          data-title="Software Developer" data-tags="Remote-friendly|Full-time"
+          data-do="Build and ship production features across active client engagements|Work spec-in-hand with AI-accelerated tooling and documented reviews|Write tests and instrumentation alongside the feature, not after|Demo and screenshot-verify your work before hand-off"
+          data-want="2+ years shipping software that real users depend on|Strong fundamentals in one modern language and its ecosystem|Comfort reading a spec and asking the sharp questions early|Care about code that the next engineer can maintain">
+          <div class="role-icon-wrap">
+            <div class="role-icon-glow"></div><div class="role-icon-ring-outer"></div><div class="role-icon-ring-mid"></div>
+            <div class="role-icon"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg></div>
+          </div>
+          <h3 class="mt-5 text-lg font-medium text-white tracking-tight">Software Developer</h3>
+          <p class="mt-2.5 text-sm text-white/60 leading-relaxed">Build and ship production features across our client engagements, working spec-in-hand with AI-accelerated tooling.</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="role-tag">Remote-friendly</span><span class="role-tag">Full-time</span>
+          </div>
+          <span class="role-cta mt-6">View Role <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </button>
+
+        <button type="button" class="role-card reveal" data-role-trigger
+          data-title="Full Stack Developer" data-tags="Remote-friendly|Full-time"
+          data-do="Own features end-to-end, from API contract through to polished UI|Design data models and endpoints that hold up as the product grows|Ship to cloud-native infrastructure with CI/CD you help maintain|Pair with designers to get interaction detail right, not approximately right"
+          data-want="3+ years across both server and client work on the same products|Fluency in React and Node, plus real SQL comfort|Judgement about where complexity belongs in a stack|A track record of features you took from blank page to production">
+          <div class="role-icon-wrap">
+            <div class="role-icon-glow"></div><div class="role-icon-ring-outer"></div><div class="role-icon-ring-mid"></div>
+            <div class="role-icon"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5z"/><path d="m3 12 9 5 9-5M3 17l9 5 9-5"/></svg></div>
+          </div>
+          <h3 class="mt-5 text-lg font-medium text-white tracking-tight">Full Stack Developer</h3>
+          <p class="mt-2.5 text-sm text-white/60 leading-relaxed">Own features end-to-end — from API design to polished UI — across React, Node, and cloud-native infrastructure.</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="role-tag">Remote-friendly</span><span class="role-tag">Full-time</span>
+          </div>
+          <span class="role-cta mt-6">View Role <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </button>
+
+        <button type="button" class="role-card reveal" data-role-trigger
+          data-title="UI/UX Designer" data-tags="Remote-friendly|Full-time"
+          data-do="Run research and turn findings into flows people can actually follow|Design enterprise workflows that reduce steps rather than decorate them|Build and maintain the component patterns engineers build from|Hand off with the states, edge cases, and motion specified"
+          data-want="A portfolio of shipped product work, not concept pieces|Strength in information architecture as much as visual craft|Fluency in Figma and a habit of designing in systems|Comfort defending decisions with reasoning and evidence">
+          <div class="role-icon-wrap">
+            <div class="role-icon-glow"></div><div class="role-icon-ring-outer"></div><div class="role-icon-ring-mid"></div>
+            <div class="role-icon"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
+          </div>
+          <h3 class="mt-5 text-lg font-medium text-white tracking-tight">UI/UX Designer</h3>
+          <p class="mt-2.5 text-sm text-white/60 leading-relaxed">Turn complex enterprise workflows into interfaces people actually enjoy using, from research through handoff.</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="role-tag">Remote-friendly</span><span class="role-tag">Full-time</span>
+          </div>
+          <span class="role-cta mt-6">View Role <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </button>
+
+        <button type="button" class="role-card reveal" data-role-trigger
+          data-title="Business Analyst" data-tags="Remote-friendly|Full-time"
+          data-do="Map the client's real problem before anyone proposes a solution|Write specs precise enough that engineers can build without guessing|Run feasibility studies and produce defensible estimates|Stay with the engagement to keep scope and reality aligned"
+          data-want="Experience translating business needs into technical requirements|Ability to interview stakeholders and hear what they didn't say|Clear written English — the spec is the deliverable|Enough technical literacy to know what's expensive to build">
+          <div class="role-icon-wrap">
+            <div class="role-icon-glow"></div><div class="role-icon-ring-outer"></div><div class="role-icon-ring-mid"></div>
+            <div class="role-icon"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6a1 1 0 0 1 1 1v2H8V3a1 1 0 0 1 1-1z"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M8 17v-3M12 17v-6M16 17v-4"/></svg></div>
+          </div>
+          <h3 class="mt-5 text-lg font-medium text-white tracking-tight">Business Analyst</h3>
+          <p class="mt-2.5 text-sm text-white/60 leading-relaxed">Map client problems into clear specs, feasibility studies, and estimations before a single line of code is written.</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="role-tag">Remote-friendly</span><span class="role-tag">Full-time</span>
+          </div>
+          <span class="role-cta mt-6">View Role <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </button>
+
+        <button type="button" class="role-card reveal" data-role-trigger
+          data-title="Motion Graphic Designer" data-tags="Remote-friendly|Contract/Full-time"
+          data-do="Animate product demos that explain the work in under a minute|Bring case studies and brand storytelling to life through motion|Build reusable motion patterns the team can apply consistently|Work with engineers to translate motion into shippable interface animation"
+          data-want="A reel showing narrative motion work, not just effects|Command of After Effects and modern export pipelines|An eye for restraint — knowing when less movement lands harder|Bonus: Lottie, Rive, or CSS/SVG animation experience">
+          <div class="role-icon-wrap">
+            <div class="role-icon-glow"></div><div class="role-icon-ring-outer"></div><div class="role-icon-ring-mid"></div>
+            <div class="role-icon"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4V8z"/></svg></div>
+          </div>
+          <h3 class="mt-5 text-lg font-medium text-white tracking-tight">Motion Graphic Designer</h3>
+          <p class="mt-2.5 text-sm text-white/60 leading-relaxed">Bring our product demos, case studies, and brand storytelling to life through animation and motion design.</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="role-tag">Remote-friendly</span><span class="role-tag">Contract/Full-time</span>
+          </div>
+          <span class="role-cta mt-6">View Role <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </button>
+
+        <button type="button" class="role-card reveal" data-role-trigger
+          data-title="Backend Developer" data-tags="Remote-friendly|Full-time"
+          data-do="Architect APIs and services that stay fast as load grows|Own data modelling, migrations, and query performance|Build the security and observability in from the start|Support production — you'll be close to what you ship"
+          data-want="3+ years on backend systems carrying real traffic|Depth in one server language plus strong relational database skills|Practical cloud experience (AWS, GCP, or Azure) and container fluency|Instinct for where a system will break before it does">
+          <div class="role-icon-wrap">
+            <div class="role-icon-glow"></div><div class="role-icon-ring-outer"></div><div class="role-icon-ring-mid"></div>
+            <div class="role-icon"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg></div>
+          </div>
+          <h3 class="mt-5 text-lg font-medium text-white tracking-tight">Backend Developer</h3>
+          <p class="mt-2.5 text-sm text-white/60 leading-relaxed">Architect scalable, secure APIs and cloud infrastructure that power everything from fintech platforms to AI agents.</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="role-tag">Remote-friendly</span><span class="role-tag">Full-time</span>
+          </div>
+          <span class="role-cta mt-6">View Role <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DON'T SEE YOUR ROLE? ================= -->
+  <section>
+    <div class="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-16 lg:py-24">
+      <div class="reveal relative overflow-hidden rounded-3xl border border-gray-700/30 bg-[#0a0a0a] px-6 md:px-16 py-16 md:py-24 text-center" data-cta>
+        <div class="cta-aurora" aria-hidden="true">
+          <div class="cta-parallax" data-cta-parallax>
+            <div class="cta-glow"></div>
+            <div class="cta-orb-wrap">
+              <div class="cta-orb-soft"></div>
+              <div class="cta-orb"></div>
+              <div class="cta-streaks"></div>
+              <div class="cta-sweep"></div>
+            </div>
+          </div>
+        </div>
+        <div class="relative z-10">
+          <h2 class="text-4xl md:text-6xl font-medium tracking-tighter text-white" style="line-height:0.9;">Don't See<br />Your <span class="shiny-text">Role?</span></h2>
+          <p class="mt-6 max-w-xl mx-auto text-sm md:text-base text-white/80 leading-relaxed">We're always open to meeting great engineers, designers, and strategists. Send us your resume and we'll keep you in mind.</p>
+          <a href="mailto:careers@loopmethods.com?subject=Resume%20%E2%80%94%20Loop%20Methods" class="group mt-10 inline-flex items-center gap-2 rounded-full bg-white text-accent px-8 py-4 text-sm font-medium hover:bg-white/90 transition-colors duration-300">
+            Send Your Resume
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= ROLE DETAIL MODAL (reuses the site's shared .cd-* modal shell) ================= -->
+<div class="cd-backdrop" data-rm-backdrop></div>
+<div class="cd-modal" data-rm-modal role="dialog" aria-modal="true" aria-labelledby="rm-title">
+  <div class="cd-panel">
+    <button type="button" class="cd-close" data-rm-close aria-label="Close">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="cd-body">
+      <h3 id="rm-title" class="text-2xl md:text-3xl font-medium tracking-tight text-white pr-12" data-rm-title></h3>
+      <div class="mt-4 flex flex-wrap gap-2" data-rm-tags></div>
+      <div class="mt-8">
+        <p class="cd-label">What you'll do</p>
+        <ul class="rm-bullets mt-3" data-rm-do></ul>
+      </div>
+      <div class="mt-8">
+        <p class="cd-label">What we're looking for</p>
+        <ul class="rm-bullets mt-3" data-rm-want></ul>
+      </div>
+      <div class="mt-9 pt-7 border-t border-white/10">
+        <a href="#" class="group inline-flex items-center gap-2 rounded-full bg-accent text-white px-7 py-3.5 text-sm font-medium hover:brightness-110 transition-all duration-300" data-rm-apply>
+          Apply Now
+          <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <p class="mt-4 text-xs text-white/50">Opens your mail client with the role in the subject line. Attach your resume and a note about what you've shipped.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====================================================================
+     FOOTER  (shared block — reused byte-for-byte on every page)
+     ==================================================================== -->
+<footer class="border-t border-gray-800/60">
+  <div class="max-w-7xl mx-auto px-6 md:px-8 py-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8">
+      <div class="col-span-2 md:col-span-1">
+        <a href="./" class="inline-flex items-center transition-opacity duration-300 hover:opacity-80">
+          <img src="assets/loop-logo-v2.png" alt="Loop Methods" class="h-11 w-auto" />
+        </a>
+        <p class="mt-5 text-sm text-white/60 leading-relaxed max-w-xs">Quality, Innovation, Perfection,<br />All in one LOOP.</p>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-tight text-white/50 mb-4">Explore</p>
+        <ul class="flex flex-col gap-3 text-sm">
+          <li><a href="./" class="text-white/80 hover:text-white transition-colors">Home</a></li>
+          <li><a href="about" class="text-white/80 hover:text-white transition-colors">About</a></li>
+          <li><a href="services" class="text-white/80 hover:text-white transition-colors">Services</a></li>
+          <li><a href="projects" class="text-white/80 hover:text-white transition-colors">Case Studies</a></li>
+          <li><a href="career" class="text-white/80 hover:text-white transition-colors">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-tight text-white/50 mb-4">Resources</p>
+        <ul class="flex flex-col gap-3 text-sm">
+          <li><a href="projects" class="text-white/80 hover:text-white transition-colors">Case Studies</a></li>
+          <li><a href="https://recruit-ai-ochre.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-white/80 hover:text-white transition-colors">HYRIX AI</a></li>
+        </ul>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <p class="text-xs uppercase tracking-tight text-white/50 mb-4">Get in touch</p>
+        <address class="not-italic flex flex-col gap-3 text-sm text-white/80">
+          <span class="flex items-start gap-2.5">
+            <svg class="w-4 h-4 mt-0.5 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="leading-relaxed">Dubai, UAE (Al Karama)<br />Noida, India (Sector-127)</span>
+          </span>
+          <a href="tel:+917503596900" class="flex items-center gap-2.5 hover:text-white transition-colors">
+            <svg class="w-4 h-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +91 7503596900
+          </a>
+          <a href="mailto:sales@loopmethods.com" class="flex items-center gap-2.5 hover:text-white transition-colors">
+            <svg class="w-4 h-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+            sales@loopmethods.com
+          </a>
+        </address>
+      </div>
+    </div>
+    <div class="mt-12 pt-8 border-t border-gray-800/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="ft-legal">
+        <p class="text-sm text-white/50">© 2026 Loop Methods. All rights reserved.</p>
+        <nav class="ft-legal-links" aria-label="Legal">
+          <a href="privacy-policy">Privacy Policy</a>
+          <a href="cookie-policy">Cookie Policy</a>
+          <a href="terms-of-service">Terms of Service</a>
+          <button type="button" data-cookie-settings>Cookie Settings</button>
+        </nav>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://www.linkedin.com/company/loopmethods/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM2.4 21h5.16V9.75H2.4V21zM9.9 9.75V21h5.16v-6.2c0-1.64.31-3.22 2.34-3.22 2 0 2.03 1.87 2.03 3.32V21h5.16v-7.03c0-4.47-.97-7.5-6.19-7.5-2.51 0-4.19 1.38-4.88 2.68h-.07V9.75H9.9z"/></svg>
+        </a>
+      </div>
+      <p class="text-sm text-white/50">Your Partner in Enterprise Technology.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/loop.js"></script>
+<script src="assets/consent.js"></script>
+<script>
+(function () {
+  var backdrop = document.querySelector('[data-rm-backdrop]');
+  var modal = document.querySelector('[data-rm-modal]');
+  if (!backdrop || !modal) return;
+  var titleEl = modal.querySelector('[data-rm-title]');
+  var tagsEl = modal.querySelector('[data-rm-tags]');
+  var doEl = modal.querySelector('[data-rm-do]');
+  var wantEl = modal.querySelector('[data-rm-want]');
+  var applyEl = modal.querySelector('[data-rm-apply]');
+  var panel = modal.querySelector('.cd-panel');
+  var lastTrigger = null;
+  var check = '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+
+  function fill(el, str) {
+    el.innerHTML = (str || '').split('|').filter(Boolean).map(function (t) {
+      return '<li>' + check + '<span>' + t + '</span></li>';
+    }).join('');
+  }
+
+  function open(card) {
+    lastTrigger = card;
+    titleEl.textContent = card.getAttribute('data-title') || '';
+    tagsEl.innerHTML = (card.getAttribute('data-tags') || '').split('|').filter(Boolean).map(function (t) {
+      return '<span class="role-tag">' + t + '</span>';
+    }).join('');
+    fill(doEl, card.getAttribute('data-do'));
+    fill(wantEl, card.getAttribute('data-want'));
+    applyEl.setAttribute('href', 'mailto:careers@loopmethods.com?subject=' + encodeURIComponent('Application: ' + (card.getAttribute('data-title') || '')));
+    backdrop.classList.add('open');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if (panel) panel.scrollTop = 0;
+    setTimeout(function () { var c = modal.querySelector('[data-rm-close]'); if (c) c.focus(); }, 60);
+  }
+
+  function close() {
+    backdrop.classList.remove('open');
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    if (lastTrigger) { lastTrigger.focus(); lastTrigger = null; }
+  }
+
+  document.querySelectorAll('[data-role-trigger]').forEach(function (card) {
+    card.addEventListener('click', function () { open(card); });
+  });
+  modal.querySelector('[data-rm-close]').addEventListener('click', close);
+  backdrop.addEventListener('click', close);
+  modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('open')) close();
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+/* ============================================================
+   Shared Legal Page template — Privacy Policy, Cookie Policy, Terms.
+   Sticky TOC (desktop) / "Jump to section" select (mobile), readable
+   720px content column, dot-grid only in the outer margins.
+   ============================================================ */
+.legal-hero-sum{margin:14px auto 0;max-width:34rem;font-size:.95rem;line-height:1.6;color:rgba(255,255,255,.75);text-wrap:pretty}
+.legal-hero-date{margin-top:8px;font-size:.8rem;color:rgba(255,255,255,.55)}
+
+.legal-wrap{position:relative}
+.legal-wrap::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:22px 22px;-webkit-mask-image:linear-gradient(to right,#000 0,transparent 18%,transparent 82%,#000 100%);mask-image:linear-gradient(to right,#000 0,transparent 18%,transparent 82%,#000 100%)}
+.legal-grid{position:relative;max-width:1120px;margin:0 auto;padding:40px 24px 56px;display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+@media (min-width:768px){.legal-grid{padding:56px 32px 72px}}
+.legal-grid{max-width:768px}
+
+/* TOC */
+.legal-toc{display:none}
+@media (min-width:1024px){.legal-toc{display:block}}
+.legal-toc-card{position:sticky;top:96px;padding:22px 20px 18px;border-radius:20px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.legal-toc-label{margin-bottom:10px;font-size:.68rem;font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:#9AA0AC}
+.legal-toc nav{position:relative;display:flex;flex-direction:column}
+/* the continuous rail */
+.legal-toc nav::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:1px;background:rgba(255,255,255,.12)}
+.legal-toc a{position:relative;display:flex;align-items:center;min-height:44px;padding:8px 0 8px 16px;font-size:.86rem;line-height:1.4;color:#9AA0AC;text-wrap:pretty;transition:color .2s ease-out}
+/* short active bar, centred on the item, sitting on top of the rail */
+.legal-toc a::before{content:"";position:absolute;left:-0.5px;top:50%;width:2px;height:20px;border-radius:2px;background:#4FA8FF;transform:translateY(-50%) scaleY(0);transition:transform .2s ease-out}
+.legal-toc a:hover{color:#F5F6F8}
+.legal-toc a.is-active{color:#4FA8FF}
+.legal-toc a.is-active::before{transform:translateY(-50%) scaleY(1)}
+.legal-toc a:focus-visible{outline:2px solid #7DC4FF;outline-offset:2px;border-radius:6px}
+@media (prefers-reduced-motion: reduce){.legal-toc a,.legal-toc a::before{transition:none}}
+
+/* Mobile jump */
+.legal-jump{display:flex;flex-direction:column;gap:6px;margin-bottom:28px}
+@media (min-width:1024px){.legal-jump{display:none}}
+.legal-jump label{font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.55)}
+.legal-jump select{width:100%;min-height:44px;padding:0 40px 0 14px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:#0b0d12 url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjN0RDNEZGIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0ibTYgOSA2IDYgNi02Ii8+PC9zdmc+") no-repeat right 14px center/16px;-webkit-appearance:none;appearance:none;font:inherit;font-size:.9rem;color:#F5F6F8}
+.legal-jump select:focus-visible{outline:2px solid #7DC4FF;outline-offset:2px}
+
+/* Body */
+.legal-body h2{margin-top:2.75rem;padding-top:2.75rem;border-top:1px solid rgba(255,255,255,.07);font-size:1.35rem;font-weight:600;line-height:1.3;letter-spacing:-.015em;color:#F5F6F8;scroll-margin-top:96px}
+.legal-body > h2:first-child,.legal-body > .legal-summary + h2{margin-top:0;padding-top:0;border-top:0}
+.legal-body h3{margin-top:1.5rem;font-size:1rem;font-weight:600;color:#F5F6F8}
+.legal-body p,.legal-body li{font-size:.95rem;line-height:1.75;color:#9AA0AC;text-wrap:pretty}
+.legal-body h2 + p,.legal-body h3 + p{margin-top:.75rem}
+.legal-body p + p,.legal-body p + ul,.legal-body ul + p{margin-top:.75rem}
+.legal-body ul{margin-top:.75rem;padding-left:1.15rem;list-style:disc;display:flex;flex-direction:column;gap:.45rem}
+.legal-body li::marker{color:#4FA8FF}
+.legal-body strong{font-weight:600;color:#F5F6F8}
+.legal-body a:not(.ck-btn){color:#7DC4FF;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(125,196,255,.4);transition:text-decoration-color .2s}
+.legal-body a:not(.ck-btn):hover{text-decoration-color:#7DC4FF}
+
+/* Glass summary callout */
+.legal-summary{margin-bottom:2.75rem;padding:20px 22px;border-radius:18px;border:1px solid rgba(79,168,255,.24);background:linear-gradient(160deg,rgba(79,168,255,.10),rgba(255,255,255,.02) 62%)}
+.legal-summary-label{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#4FA8FF}
+.legal-body .legal-summary p{margin-top:.4rem;font-size:1rem;color:#F5F6F8}
+
+/* Glass callout (one per page: cookie table / your rights) */
+.legal-callout{margin-top:1rem;padding:6px 20px 18px;border-radius:20px;border:1px solid rgba(79,168,255,.18);background:linear-gradient(160deg,rgba(79,168,255,.08),rgba(255,255,255,.025) 60%)}
+.legal-callout > p:first-child{margin-top:14px}
+.legal-callout .ck-table{font-size:.86rem}
+.legal-callout .ck-table th:first-child,.legal-callout .ck-table td:first-child{width:34%}
+.legal-callout .ck-table th:last-child,.legal-callout .ck-table td:last-child{width:22%;white-space:nowrap}
+@media (max-width:640px){.legal-callout{padding:4px 16px 16px}.legal-callout .ck-table td:last-child{white-space:normal}.legal-callout .ck-table th,.legal-callout .ck-table td{width:auto}}
+
+/* Category cards */
+.legal-cards{margin-top:1.25rem;display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+@media (min-width:640px){.legal-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.legal-card{padding:18px;border-radius:16px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+.legal-card-head{display:flex;gap:12px;align-items:center}
+.legal-body .legal-card-name{font-size:.95rem;font-weight:600;line-height:1.3;color:#F5F6F8}
+.legal-body .legal-card-status{margin-top:1px;font-size:.75rem;line-height:1.4;color:rgba(255,255,255,.6)}
+.legal-body .legal-card-desc{margin-top:12px;font-size:.875rem;line-height:1.6}
+
+/* Subtle band for the cookie table */
+.legal-band{margin-top:1.25rem;padding:6px 18px;border-radius:18px;border:1px solid rgba(79,168,255,.14);background:rgba(79,168,255,.045);overflow-x:auto}
+.legal-band .ck-table{font-size:.84rem;min-width:560px}
+@media (max-width:640px){.legal-band .ck-table{min-width:0}}
+.legal-body .legal-note{margin-top:.5rem;font-size:.82rem;color:rgba(255,255,255,.62)}
+
+.legal-actions{margin-top:1.25rem;display:flex;flex-wrap:wrap;gap:10px}

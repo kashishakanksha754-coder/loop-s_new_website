@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Loop Methods — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          accent: '#64CEFB',
+        },
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        },
+        maxWidth: {
+          '7xl': '80rem',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  :root {
+    --accent: #64CEFB;
+  }
+  * { -webkit-font-smoothing: antialiased; }
+  body { background: #000; }
+  ::selection { background: rgba(100, 206, 251, 0.3); color: #fff; }
+
+  /* ShinyText — pure CSS, base #64CEFB, shine #ffffff, ~100deg, 3s loop */
+  .shiny-text {
+    background: linear-gradient(100deg, #64CEFB 0%, #64CEFB 35%, #ffffff 50%, #64CEFB 65%, #64CEFB 100%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: shinySweep 3s linear infinite;
+  }
+  @keyframes shinySweep {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -100% 0; }
+  }
+
+  /* Scroll-in: subtle fade + translate.
+     Base state is VISIBLE — hidden state only applies once JS confirms it's running
+     (html.js-reveal), so no-JS / no-observer environments still show all content. */
+  .js-reveal .reveal:not(.in) {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  .reveal {
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .js-reveal .reveal:not(.in) { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .shiny-text { animation: none !important; background-position: 50% 0 !important; }
+    * { scroll-behavior: auto !important; }
+  }
+
+  /* Spacing rhythm bars */
+  .rhythm-bar { background: repeating-linear-gradient(180deg, rgba(100,206,251,0.16) 0 1px, transparent 1px 8px); }
+</style>
+</head>
+<body class="font-sans text-white/80 antialiased">
+
+  <!-- ============ NAV (shared component) ============ -->
+  <header class="sticky top-0 z-50 border-b border-gray-800/60 bg-black/70 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-6 md:px-8 h-16 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#top" class="flex items-center shrink-0 transition-opacity duration-300 hover:opacity-80">
+        <img src="assets/loop-logo-v2.png" alt="Loop Methods" class="h-8 md:h-9 w-auto" />
+      </a>
+      <!-- Links pill (lg+) -->
+      <nav class="hidden lg:flex items-center gap-1 rounded-full border border-gray-700 px-2 py-1.5">
+        <a href="#color" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Color</a>
+        <a href="#type" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Type</a>
+        <a href="#spacing" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Spacing</a>
+        <a href="#components" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Components</a>
+        <a href="#motion" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Motion</a>
+      </nav>
+      <!-- Hamburger (below lg) -->
+      <button class="lg:hidden grid place-items-center w-10 h-10 rounded-full border border-gray-700 text-white/80 hover:text-white transition-colors" aria-label="Open menu">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="relative overflow-hidden">
+      <!-- decorative background glow + dark overlay -->
+      <div class="pointer-events-none absolute inset-0 z-0">
+        <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full" style="background: radial-gradient(circle, rgba(100,206,251,0.10) 0%, transparent 60%);"></div>
+        <div class="absolute inset-0 bg-black/40"></div>
+      </div>
+      <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-8 pt-24 pb-24 md:pt-32 md:pb-32">
+        <p class="reveal text-xs md:text-sm uppercase tracking-tight text-white/80 mb-6">Design System · v1.0</p>
+        <h1 class="reveal text-5xl sm:text-6xl md:text-8xl font-medium tracking-tighter text-white" style="line-height:0.85;">
+          Loop&nbsp;Methods
+          <span class="block shiny-text">Design System</span>
+        </h1>
+        <p class="reveal mt-8 max-w-2xl text-base md:text-lg text-white/80 leading-relaxed">
+          One accent. One rhythm. One container. The shared language for every section and page of the
+          Loop Methods site — <span class="text-white">Your Partner in Tech-Driven Business Growth.</span>
+        </p>
+        <div class="reveal mt-10 flex flex-wrap items-center gap-4">
+          <!-- Primary CTA: light button, accent text, arrow translates on hover -->
+          <a href="#components" class="group inline-flex items-center gap-2 rounded-full bg-white text-accent px-6 md:px-8 py-3 md:py-4 text-sm font-medium hover:bg-white/90 transition-colors duration-300">
+            Explore components
+            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
+          </a>
+          <a href="#color" class="group inline-flex items-center gap-2 rounded-full border border-gray-700 px-6 md:px-8 py-3 md:py-4 text-sm font-medium text-white/80 hover:text-white hover:border-gray-600 transition-colors duration-300">
+            Tokens
+            <i data-lucide="arrow-down" class="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5"></i>
+          </a>
+        </div>
+
+        <!-- focus areas -->
+        <div class="reveal mt-16 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/60">
+          <span>Software Development</span><span class="text-gray-700">·</span>
+          <span>Blockchain</span><span class="text-gray-700">·</span>
+          <span>Web 3.0</span><span class="text-gray-700">·</span>
+          <span>Industry 4.0</span><span class="text-gray-700">·</span>
+          <span>AI &amp; ML</span><span class="text-gray-700">·</span>
+          <span>Salesforce</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COLOR ============ -->
+    <section id="color" class="max-w-7xl mx-auto px-6 md:px-8 py-24 md:py-32 border-t border-gray-800/60">
+      <div class="reveal max-w-3xl">
+        <p class="text-xs md:text-sm uppercase tracking-tight text-white/80 mb-4">01 — Color</p>
+        <h2 class="text-3xl md:text-5xl font-medium tracking-tight text-white">One accent, used everywhere.</h2>
+        <p class="mt-5 text-base text-white/80 leading-relaxed">Backgrounds stay dark. Body text is white at 80% opacity; headings and hover states go full white. A single accent token — <span class="text-accent">#64CEFB</span> — carries every highlight. Never mix two accents.</p>
+      </div>
+
+      <div class="reveal mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Accent -->
+        <div class="rounded-2xl border border-gray-700/30 bg-[#0a0a0a] overflow-hidden">
+          <div class="h-28" style="background:#64CEFB;"></div>
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <span class="text-white font-medium">Accent</span>
+              <span class="text-accent text-sm">single token</span>
+            </div>
+            <p class="mt-1 text-sm text-white/60">#64CEFB · highlights, links, glints</p>
+          </div>
+        </div>
+        <!-- Background -->
+        <div class="rounded-2xl border border-gray-700/30 bg-[#0a0a0a] overflow-hidden">
+          <div class="h-28 grid place-items-center" style="background:#000;"><span class="text-white/30 text-xs">#000000</span></div>
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <span class="text-white font-medium">Background</span>
+              <span class="text-white/50 text-sm">near-black</span>
+            </div>
+            <p class="mt-1 text-sm text-white/60">#000000 · all section backgrounds</p>
+          </div>
+        </div>
+        <!-- Overlay -->
+        <div class="rounded-2xl border border-gray-700/30 bg-[#0a0a0a] overflow-hidden">
+          <div class="h-28 relative grid place-items-center" style="background:#64CEFB;">
+            <div class="absolute inset-0 bg-black/40"></div>
+            <span class="relative text-white text-xs">bg-black/40</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between">
+              <span class="text-white font-medium">Media overlay</span>
+              <span class="text-white/50 text-sm">legibility</span>
+            </div>
+            <p class="mt-1 text-sm text-white/60">bg-black/40 over any background video</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- text + border swatch row -->
+      <div class="reveal mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="rounded-2xl border border-gray-700/30 bg-[#0a0a0a] p-5">
+          <div class="h-10 flex items-center"><span class="text-white text-lg font-medium">Aa</span></div>
+          <p class="mt-3 text-sm text-white">Heading</p>
+          <p class="text-xs text-white/50">white / 100%</p>
+        </div>
+        <div class="rounded-2xl border border-gray-700/30 bg-[#0a0a0a] p-5">
+          <div class="h-10 flex items-center"><span class="text-white/80 text-lg">Aa</span></div>
+          <p class="mt-3 text-sm text-white">Body</p>
+          <p class="text-xs text-white/50">white / 80%</p>
+        </div>
+        <div class="rounded-2xl border border-gray-700/30 bg-[#0a0a0a] p-5">
+          <div class="h-10 flex items-center"><span class="text-white/50 text-lg">Aa</span></div>
+          <p class="mt-3 text-sm text-white">Muted</p>
+          <p class="text-xs text-white/50">white / 50%</p>
+        </div>
+        <div class="rounded-2xl border border-gray-700/30 bg-[#0a0a0a] p-5">
+          <div class="h-10 flex items-center gap-2">
+            <span class="block w-full h-px bg-gray-700"></span>
+          </div>
+          <p class="mt-3 text-sm text-white">Border</p>
+          <p class="text-xs text-white/50">gray-700 / 800, low op.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TYPOGRAPHY ============ -->
+    <section id="type" class="max-w-7xl mx-auto px-6 md:px-8 py-24 md:py-32 border-t border-gray-800/60">
+      <div class="reveal max-w-3xl">
+        <p class="text-xs md:text-sm uppercase tracking-tight text-white/80 mb-4">02 — Typography</p>
+        <h2 class="text-3xl md:text-5xl font-medium tracking-tight text-white">Inter, set tight.</h2>
+        <p class="mt-5 text-base text-white/80 leading-relaxed">Display runs tracking-tighter at 0.85 line-height, font-medium. Headings are large and tracking-tight. Body shifts from text-sm on mobile to text-base on desktop. Eyebrows are uppercase, tracking-tight, white/80.</p>
+      </div>
+
+      <div class="reveal mt-12 divide-y divide-gray-800/60 border-y border-gray-800/60">
+        <!-- Display -->
+        <div class="py-8 grid md:grid-cols-[180px_1fr] gap-4 md:gap-8 items-baseline">
+          <div class="text-xs uppercase tracking-tight text-white/50">Display / Hero</div>
+          <div>
+            <p class="text-5xl md:text-7xl font-medium tracking-tighter text-white" style="line-height:0.85;">Tech-driven growth</p>
+            <p class="mt-3 text-xs text-white/40">font-medium · tracking-tighter · leading-[0.85]</p>
+          </div>
+        </div>
+        <!-- Section heading -->
+        <div class="py-8 grid md:grid-cols-[180px_1fr] gap-4 md:gap-8 items-baseline">
+          <div class="text-xs uppercase tracking-tight text-white/50">Section heading</div>
+          <div>
+            <p class="text-3xl md:text-5xl font-medium tracking-tight text-white">Multi-industry technology partner</p>
+            <p class="mt-3 text-xs text-white/40">font-medium · tracking-tight · white</p>
+          </div>
+        </div>
+        <!-- Body -->
+        <div class="py-8 grid md:grid-cols-[180px_1fr] gap-4 md:gap-8 items-baseline">
+          <div class="text-xs uppercase tracking-tight text-white/50">Body</div>
+          <div>
+            <p class="text-sm md:text-base text-white/80 max-w-xl leading-relaxed">Loop Methods builds across Software Development, Blockchain, Web 3.0, Industry 4.0, AI &amp; ML and Salesforce — a multi-industry consultancy, not a fixed-price studio.</p>
+            <p class="mt-3 text-xs text-white/40">text-sm → md:text-base · white/80 · leading-relaxed</p>
+          </div>
+        </div>
+        <!-- Eyebrow -->
+        <div class="py-8 grid md:grid-cols-[180px_1fr] gap-4 md:gap-8 items-baseline">
+          <div class="text-xs uppercase tracking-tight text-white/50">Eyebrow label</div>
+          <div>
+            <p class="text-xs md:text-sm uppercase tracking-tight text-white/80">What we do</p>
+            <p class="mt-3 text-xs text-white/40">uppercase · text-xs/sm · tracking-tight · white/80</p>
+          </div>
+        </div>
+        <!-- ShinyText -->
+        <div class="py-8 grid md:grid-cols-[180px_1fr] gap-4 md:gap-8 items-baseline">
+          <div class="text-xs uppercase tracking-tight text-white/50">ShinyText</div>
+          <div>
+            <p class="text-4xl md:text-6xl font-medium tracking-tighter shiny-text" style="line-height:0.9;">Your Partner in Growth</p>
+            <p class="mt-3 text-xs text-white/40">CSS @keyframes · base #64CEFB → shine #fff · ~100° · 3s loop</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SPACING ============ -->
+    <section id="spacing" class="max-w-7xl mx-auto px-6 md:px-8 py-24 md:py-32 border-t border-gray-800/60">
+      <div class="reveal max-w-3xl">
+        <p class="text-xs md:text-sm uppercase tracking-tight text-white/80 mb-4">03 — Spacing</p>
+        <h2 class="text-3xl md:text-5xl font-medium tracking-tight text-white">An 8px rhythm, consolidated gaps.</h2>
+        <p class="mt-5 text-base text-white/80 leading-relaxed">Everything sits on an 8px vertical grid. Between major sections the visible gap is ~96px desktop / ~64px tablet / ~48px mobile. When a section's bottom padding meets the next section's top padding, consolidate — the visible gap equals the target, never the sum.</p>
+      </div>
+
+      <div class="reveal mt-12 grid lg:grid-cols-2 gap-6">
+        <!-- 8px scale -->
+        <div class="rounded-2xl border border-gray-700/30 bg-[#0a0a0a] p-6">
+          <p class="text-sm text-white font-medium mb-5">8px scale</p>
+          <div class="space-y-3">
+            <div class="flex items-center gap-4"><span class="w-10 text-xs text-white/50 tabular-nums">8</span><span class="h-2 bg-accent/70 rounded-full" style="width:8px;"></span></div>
+            <div class="flex items-center gap-4"><span class="w-10 text-xs text-white/50 tabular-nums">16</span><span class="h-2 bg-accent/70 rounded-full" style="width:16px;"></span></div>
+            <div class="flex items-center gap-4"><span class="w-10 text-xs text-white/50 tabular-nums">24</span><span class="h-2 bg-accent/70 rounded-full" style="width:24px;"></span></div>
+            <div class="flex items-center gap-4"><span class="w-10 text-xs text-white/50 tabular-nums">32</span><span class="h-2 bg-accent/70 rounded-full" style="width:32px;"></span></div>
+            <div class="flex items-center gap-4"><span class="w-10 text-xs text-white/50 tabular-nums">48</span><span class="h-2 bg-accent/70 rounded-full" style="width:48px;"></span></div>
+            <div class="flex items-center gap-4"><span class="w-10 text-xs text-white/50 tabular-nums">64</span><span class="h-2 bg-accent/70 rounded-full" style="width:64px;"></span></div>
+            <div class="flex items-center gap-4"><span class="w-10 text-xs text-white/50 tabular-nums">96</span><span class="h-2 bg-accent rounded-full" style="width:96px;"></span></div>
+          </div>
+        </div>
+        <!-- Section gap rule -->
+        <div class="rounded-2xl border border-gray-700/30 bg-[#0a0a0a] p-6 overflow-hidden">
+          <p class="text-sm text-white font-medium mb-5">Section gap (consolidated)</p>
+          <div class="rounded-xl overflow-hidden border border-gray-800">
+            <div class="bg-white/[0.03] px-4 py-6 text-sm text-white/80">Section A — content</div>
+            <div class="relative rhythm-bar h-24 grid place-items-center">
+              <span class="text-xs text-accent">visible gap = 96px (not A.pb + B.pt)</span>
+            </div>
+            <div class="bg-white/[0.03] px-4 py-6 text-sm text-white/80">Section B — content</div>
+          </div>
+          <p class="mt-4 text-xs text-white/40">No empty bands from min-height. Identical internal top/bottom padding across sections.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COMPONENTS ============ -->
+    <section id="components" class="max-w-7xl mx-auto px-6 md:px-8 py-24 md:py-32 border-t border-gray-800/60">
+      <div class="reveal max-w-3xl">
+        <p class="text-xs md:text-sm uppercase tracking-tight text-white/80 mb-4">04 — Components</p>
+        <h2 class="text-3xl md:text-5xl font-medium tracking-tight text-white">Shared building blocks.</h2>
+        <p class="mt-5 text-base text-white/80 leading-relaxed">Reuse these verbatim across every page. Nav, buttons, and cards never get re-styled per section.</p>
+      </div>
+
+      <!-- Buttons -->
+      <div class="reveal mt-12">
+        <p class="text-xs uppercase tracking-tight text-white/50 mb-5">Primary CTA &amp; variants</p>
+        <div class="rounded-2xl border border-gray-700/30 bg-[#0a0a0a] p-8 md:p-10 flex flex-wrap items-center gap-5">
+          <a href="#" class="group inline-flex items-center gap-2 rounded-full bg-white text-accent px-6 md:px-8 py-3 md:py-4 text-sm font-medium hover:bg-white/90 transition-colors duration-300">
+            Get started
+            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
+          </a>
+          <a href="#" class="group inline-flex items-center gap-2 rounded-full bg-accent text-white px-6 md:px-8 py-3 md:py-4 text-sm font-medium hover:brightness-110 transition-all duration-300">
+            Book a call
+            <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
+          </a>
+          <a href="#" class="group inline-flex items-center gap-2 rounded-full border border-gray-700 px-6 md:px-8 py-3 md:py-4 text-sm font-medium text-white/80 hover:text-white hover:border-gray-600 transition-colors duration-300">
+            Secondary
+            <i data-lucide="arrow-up-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+          </a>
+        </div>
+        <p class="mt-4 text-xs text-white/40">rounded-full · px-6 md:px-8 · py-3 md:py-4 · light/accent fill on dark (never black-on-black) · arrow translates on group-hover</p>
+      </div>
+
+      <!-- Cards -->
+      <div class="reveal mt-12">
+        <p class="text-xs uppercase tracking-tight text-white/50 mb-5">Cards</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Card -->
+          <div class="group rounded-2xl border border-gray-700/30 bg-[#0a0a0a] p-7 hover:border-gray-600/50 transition-colors duration-300">
+            <span class="grid place-items-center w-11 h-11 rounded-full border border-gray-700 text-accent mb-6">
+              <i data-lucide="code-xml" class="w-5 h-5"></i>
+            </span>
+            <h3 class="text-lg font-medium text-white tracking-tight">Software Development</h3>
+            <p class="mt-2 text-sm text-white/80 leading-relaxed">Web, mobile and platform engineering built to scale with your business.</p>
+            <span class="mt-5 inline-flex items-center gap-1.5 text-sm text-white/80 group-hover:text-white transition-colors">Learn more <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1"></i></span>
+          </div>
+          <div class="group rounded-2xl border border-gray-700/30 bg-[#0a0a0a] p-7 hover:border-gray-600/50 transition-colors duration-300">
+            <span class="grid place-items-center w-11 h-11 rounded-full border border-gray-700 text-accent mb-6">
+              <i data-lucide="cpu" class="w-5 h-5"></i>
+            </span>
+            <h3 class="text-lg font-medium text-white tracking-tight">AI &amp; Machine Learning</h3>
+            <p class="mt-2 text-sm text-white/80 leading-relaxed">Models and pipelines that turn your data into decisions and automation.</p>
+            <span class="mt-5 inline-flex items-center gap-1.5 text-sm text-white/80 group-hover:text-white transition-colors">Learn more <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1"></i></span>
+          </div>
+          <div class="group rounded-2xl border border-gray-700/30 bg-[#0a0a0a] p-7 hover:border-gray-600/50 transition-colors duration-300">
+            <span class="grid place-items-center w-11 h-11 rounded-full border border-gray-700 text-accent mb-6">
+              <i data-lucide="blocks" class="w-5 h-5"></i>
+            </span>
+            <h3 class="text-lg font-medium text-white tracking-tight">Blockchain &amp; Web 3.0</h3>
+            <p class="mt-2 text-sm text-white/80 leading-relaxed">Smart contracts, wallets and decentralized infrastructure, end to end.</p>
+            <span class="mt-5 inline-flex items-center gap-1.5 text-sm text-white/80 group-hover:text-white transition-colors">Learn more <i data-lucide="arrow-right" class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1"></i></span>
+          </div>
+        </div>
+        <p class="mt-4 text-xs text-white/40">dark surface (#0a0a0a) · border-gray-700/30 · rounded-2xl · even internal padding · subtle hover</p>
+      </div>
+
+      <!-- Nav spec -->
+      <div class="reveal mt-12">
+        <p class="text-xs uppercase tracking-tight text-white/50 mb-5">Nav (logo + pill links)</p>
+        <div class="rounded-2xl border border-gray-700/30 bg-[#0a0a0a] p-5">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <img src="assets/loop-logo-v2.png" alt="Loop Methods" class="h-8 w-auto" />
+            </div>
+            <nav class="hidden sm:flex items-center gap-1 rounded-full border border-gray-700 px-2 py-1.5">
+              <a href="#" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors">Services</a>
+              <a href="#" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors">Work</a>
+              <a href="#" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors">Contact</a>
+            </nav>
+            <button class="sm:hidden grid place-items-center w-10 h-10 rounded-full border border-gray-700 text-white/80" aria-label="Menu"><i data-lucide="menu" class="w-5 h-5"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MOTION ============ -->
+    <section id="motion" class="max-w-7xl mx-auto px-6 md:px-8 py-24 md:py-32 border-t border-gray-800/60">
+      <div class="reveal max-w-3xl">
+        <p class="text-xs md:text-sm uppercase tracking-tight text-white/80 mb-4">05 — Motion</p>
+        <h2 class="text-3xl md:text-5xl font-medium tracking-tight text-white">Subtle, always.</h2>
+        <p class="mt-5 text-base text-white/80 leading-relaxed">Fade + small translate on scroll-in. Smooth transitions on every interactive element. Nothing flashy. All motion respects <span class="text-white">prefers-reduced-motion</span>.</p>
+      </div>
+      <div class="reveal mt-12 grid sm:grid-cols-3 gap-4">
+        <div class="rounded-2xl border border-gray-700/30 bg-[#0a0a0a] p-6">
+          <i data-lucide="eye" class="w-5 h-5 text-accent"></i>
+          <p class="mt-4 text-white font-medium text-sm">Scroll reveal</p>
+          <p class="mt-1 text-sm text-white/60">opacity 0→1, translateY 16→0, 0.7s ease-out.</p>
+        </div>
+        <div class="rounded-2xl border border-gray-700/30 bg-[#0a0a0a] p-6">
+          <i data-lucide="mouse-pointer-click" class="w-5 h-5 text-accent"></i>
+          <p class="mt-4 text-white font-medium text-sm">Hover</p>
+          <p class="mt-1 text-sm text-white/60">color + transform, 200–300ms transitions.</p>
+        </div>
+        <div class="rounded-2xl border border-gray-700/30 bg-[#0a0a0a] p-6">
+          <i data-lucide="accessibility" class="w-5 h-5 text-accent"></i>
+          <p class="mt-4 text-white font-medium text-sm">Reduced motion</p>
+          <p class="mt-1 text-sm text-white/60">All animation disabled when the user prefers it.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="border-t border-gray-800/60">
+    <div class="max-w-7xl mx-auto px-6 md:px-8 py-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <img src="assets/loop-logo-v2.png" alt="Loop Methods" class="h-10 w-auto" />
+      </div>
+      <p class="text-sm text-white/50">Design System v1.0 · Your Partner in Tech-Driven Business Growth.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Enable the hidden-before-reveal state only now that JS is confirmed running.
+    document.documentElement.classList.add('js-reveal');
+    lucide.createIcons();
+    const reveals = document.querySelectorAll('.reveal');
+    const show = (el) => el.classList.add('in');
+    // Scroll-reveal
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach((el) => {
+      // Anything already in view on load reveals immediately.
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) show(el);
+      else io.observe(el);
+    });
+    // Failsafe: if the observer never fires (some embedded environments), reveal everything.
+    setTimeout(() => reveals.forEach(show), 600);
+  </script>
+</body>
+</html>

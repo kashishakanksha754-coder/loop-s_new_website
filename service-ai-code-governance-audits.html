@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050608">
+<style>html{background:#050608;color-scheme:dark}body{background:#050608}[data-hero-video],.abt-hero video{background:#050608}@view-transition{navigation:auto}::view-transition-group(root){background:#050608}::view-transition-old(root),::view-transition-new(root){animation-duration:200ms;animation-timing-function:ease-out}@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Code Governance &amp; Audits — Loop Methods</title>
+<meta name="description" content="Review and rescue AI-generated codebases for production." />
+<link rel="canonical" href="https://loopmethods.com/service-ai-code-governance-audits" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Loop Methods" />
+<meta property="og:title" content="AI Code Governance &amp; Audits — Loop Methods" />
+<meta property="og:description" content="Review and rescue AI-generated codebases for production." />
+<meta property="og:url" content="https://loopmethods.com/service-ai-code-governance-audits" />
+<meta property="og:image" content="https://loopmethods.com/assets/og-cover.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AI Code Governance &amp; Audits — Loop Methods" />
+<meta name="twitter:description" content="Review and rescue AI-generated codebases for production." />
+<meta name="twitter:image" content="https://loopmethods.com/assets/og-cover.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/tailwind.css" />
+<link rel="stylesheet" href="assets/loop.css" />
+<link rel="stylesheet" href="assets/consent.css" />
+</head>
+<body class="font-sans text-white/80 antialiased bg-black">
+
+<header class="sticky top-0 z-50 border-b border-gray-800/60 bg-black/70 backdrop-blur-xl">
+  <div class="max-w-7xl mx-auto px-6 md:px-8 h-16 flex items-center justify-between gap-4">
+    <a href="./" class="flex items-center shrink-0 transition-opacity duration-300 hover:opacity-80">
+      <img src="assets/loop-logo-v2.png" alt="Loop Methods" class="h-8 md:h-9 w-auto" />
+    </a>
+    <nav class="hidden lg:flex items-center gap-1 rounded-full border border-gray-700 px-2 py-1.5">
+      <a href="./" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Home</a>
+      <a href="about" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">About</a>
+      <a href="services" class="px-4 py-1.5 rounded-full text-sm text-white bg-white/10 transition-colors duration-200">Services</a>
+      <a href="projects" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Case Studies</a>
+      <a href="career" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Career</a>
+    </nav>
+    <a href="#contact" class="hidden lg:inline-flex group items-center gap-2 rounded-full bg-accent text-white px-5 py-2.5 text-sm font-medium hover:brightness-110 transition-all duration-300 shrink-0">
+      Get in Touch
+      <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <button data-menu-toggle aria-expanded="false" aria-label="Open menu" class="lg:hidden grid place-items-center w-10 h-10 rounded-full border border-gray-700 text-white/80 hover:text-white transition-colors">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div data-mobile-menu class="mobile-menu lg:hidden border-t border-gray-800/60 bg-black/95 backdrop-blur-xl">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex flex-col">
+      <a href="./" class="py-3 text-base text-white/80 hover:text-white border-b border-gray-800/60 transition-colors">Home</a>
+      <a href="about" class="py-3 text-base text-white/80 hover:text-white border-b border-gray-800/60 transition-colors">About</a>
+      <a href="services" class="py-3 text-base text-white border-b border-gray-800/60">Services</a>
+      <a href="projects" class="py-3 text-base text-white/80 hover:text-white border-b border-gray-800/60 transition-colors">Case Studies</a>
+      <a href="career" class="py-3 text-base text-white/80 hover:text-white border-b border-gray-800/60 transition-colors">Career</a>
+      <a href="#contact" class="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-accent text-white px-5 py-3 text-sm font-medium">Get in Touch</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= HEADER (two-column hero) ================= -->
+  <section class="dtl-section dtl-hero relative overflow-hidden">
+    <div class="page-hero-glow" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute inset-0 z-0">
+      <div class="absolute -top-48 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full" style="background: radial-gradient(circle, rgba(79,168,255,0.10) 0%, transparent 60%);"></div>
+      <div class="absolute inset-0" style="background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px); background-size: 64px 64px; mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 20%, transparent 80%); -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 20%, transparent 80%);"></div>
+    </div>
+    <div class="dtl-wrap relative z-10">
+      <nav class="reveal text-sm text-white/50 mb-8" aria-label="Breadcrumb">
+        <a href="services" class="hover:text-white transition-colors">Services</a>
+        <span class="mx-2 text-gray-700">/</span>
+        <span class="text-white/70">AI Code Governance &amp; Audits</span>
+      </nav>
+      <div class="grid md:grid-cols-[1.15fr_0.85fr] gap-10 md:gap-12 items-center">
+        <div class="reveal relative">
+          <div class="dtl-header-glow" aria-hidden="true"></div>
+          <div class="relative flex items-start gap-5">
+            <div class="dtl-icon-wrap">
+              <span class="dtl-icon-glow" aria-hidden="true"></span>
+              <span class="dtl-icon-ring-outer" aria-hidden="true"></span>
+              <span class="dtl-icon-ring-mid" aria-hidden="true"></span>
+              <span class="dtl-icon"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            </div>
+            <div class="pt-1">
+              <h1 class="text-3xl md:text-5xl font-medium tracking-tight text-white">AI Code Governance &amp; <span class="dtl-headline-accent">Audits</span></h1>
+              <p class="mt-2 text-base md:text-lg text-white/70">Review and rescue AI-generated codebases for production.</p>
+            </div>
+          </div>
+          <div class="relative mt-7 dtl-fact-row">
+            <span class="dtl-fact-pill"><span class="dot"></span>Full codebase audit</span>
+            <span class="dtl-fact-pill"><span class="dot"></span>Security &amp; correctness gates</span>
+            <span class="dtl-fact-pill"><span class="dot"></span>Production-readiness sign-off</span>
+          </div>
+        </div>
+        <div class="reveal dtl-mock">
+          <span class="dtl-mock-label"><span class="live-dot"></span>Live preview</span>
+          <div class="flex items-center gap-1.5 mb-4"><span class="dtl-mock-dot"></span><span class="dtl-mock-dot"></span><span class="dtl-mock-dot"></span></div>
+          <div class="space-y-2.5">
+            <div class="rounded-lg border border-white/10 p-3 text-xs text-white/60 leading-relaxed">AI Code Governance &amp; Audits<span class="dtl-mock-typing"></span></div>
+            <div class="dtl-mock-progress-label"><span>Processing</span><span>72%</span></div>
+            <div class="dtl-mock-bar accent w-[72%]"></div>
+            <div class="dtl-mock-result"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg>Ready for review</div>
+          </div>
+        </div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dtl-divider"></div>
+
+  <!-- ================= WHAT'S INCLUDED ================= -->
+  <section class="dtl-section relative overflow-hidden">
+    <div class="pointer-events-none absolute inset-0" style="background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 64px 64px; mask-image: radial-gradient(ellipse 80% 110% at 50% 50%, #000 15%, transparent 80%); -webkit-mask-image: radial-gradient(ellipse 80% 110% at 50% 50%, #000 15%, transparent 80%);"></div>
+    <div class="dtl-wrap relative">
+      <p class="reveal dtl-eyebrow">What's included</p>
+      <p class="reveal text-xl md:text-2xl font-medium tracking-tight text-white mb-8 max-w-xl">Everything needed to trust an AI-generated codebase in production.</p>
+      <div class="dtl-included-panel"><div class="dtl-chip-grid">
+        <div class="reveal dtl-chip"><span class="dtl-chip-ic"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Full codebase security audit</div>
+        <div class="reveal dtl-chip"><span class="dtl-chip-ic"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Architecture &amp; dependency review</div>
+        <div class="reveal dtl-chip"><span class="dtl-chip-ic"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Test coverage gap analysis</div>
+        <div class="reveal dtl-chip"><span class="dtl-chip-ic"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Documented governance framework</div>
+        <div class="reveal dtl-chip no-line"><span class="dtl-chip-ic"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Remediation of critical findings</div>
+        <div class="reveal dtl-chip no-line"><span class="dtl-chip-ic"><svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Production-readiness sign-off</div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dtl-divider"></div>
+
+  <!-- ================= WHO IT'S FOR ================= -->
+  <section class="dtl-section">
+    <div class="dtl-wrap">
+      <p class="reveal dtl-eyebrow">Who it's for</p>
+      <div class="reveal grid md:grid-cols-[1.4fr_0.85fr] gap-10 items-center">
+        <p class="dtl-quote-text max-w-[640px]">Teams that shipped fast with AI coding tools and now need a senior engineering audit before scaling — or before a security review, funding round, or enterprise customer asks hard questions.</p>
+        <div class="dtl-callout-card"><span class="dtl-callout-icon"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="0.5" fill="currentColor"/></svg></span><p>Best for codebases built with limited senior oversight.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dtl-divider"></div>
+
+  <!-- ================= OUR APPROACH (mini, subordinate to site-wide 01-04) ================= -->
+  <section class="dtl-section dtl-approach-band relative overflow-hidden">
+    <div class="pointer-events-none absolute inset-0" style="background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 64px 64px; mask-image: radial-gradient(ellipse 80% 110% at 50% 50%, #000 15%, transparent 80%); -webkit-mask-image: radial-gradient(ellipse 80% 110% at 50% 50%, #000 15%, transparent 80%);"></div>
+    <div class="dtl-wrap relative">
+      <p class="reveal dtl-eyebrow">Our approach</p>
+      <div class="reveal dtl-steps">
+        <span class="dtl-step-line" aria-hidden="true"></span>
+        <div>
+          <span class="dtl-step-badge"><span class="ring-outer"></span><span class="ring-mid"></span><span class="num">1</span></span>
+          <p class="mt-4 text-sm font-medium text-white">Audit the codebase</p>
+          <p class="mt-2.5 text-sm text-white/70 leading-relaxed">Architecture, security, dependencies, and test coverage, end to end.</p>
+        </div>
+        <div>
+          <span class="dtl-step-badge"><span class="ring-outer"></span><span class="ring-mid"></span><span class="num">2</span></span>
+          <p class="mt-4 text-sm font-medium text-white">Document the findings</p>
+          <p class="mt-2.5 text-sm text-white/70 leading-relaxed">A prioritized, plain-English report of risk and remediation.</p>
+        </div>
+        <div>
+          <span class="dtl-step-badge"><span class="ring-outer"></span><span class="ring-mid"></span><span class="num">3</span></span>
+          <p class="mt-4 text-sm font-medium text-white">Remediate &amp; sign off</p>
+          <p class="mt-2.5 text-sm text-white/70 leading-relaxed">Fix critical issues and establish an ongoing governance gate.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dtl-divider"></div>
+
+  <!-- ================= SEE IT IN ACTION (related case study) ================= -->
+  <section class="dtl-section">
+    <div class="dtl-wrap">
+      <p class="reveal dtl-eyebrow">See it in action</p>
+      <div class="reveal case-card group block rounded-2xl bg-[#0a0a0a] max-w-xl cursor-pointer" data-case-trigger tabindex="0" role="button" aria-haspopup="dialog" data-title="Trustin Digital Escrow" data-cat="Fintech" data-desc="A blockchain-powered escrow platform for high-value transactions — governed by documented security gates." data-img="assets/trustin-cover.jpg" data-challenge="Developing a mass-market digital escrow platform from scratch and scaling it into a PaaS solution." data-solution="A secure digital escrow platform with contract-based agreements on Hyperledger Fabric, ensuring transparency and trust." data-offers="Secure fund safeguarding|Contract-based escrow|Built on Hyperledger Fabric|Scalable PaaS solution">
+        <div class="case-media aspect-[16/9] rounded-t-2xl">
+          <img class="case-img object-cover w-full h-full" src="assets/trustin-cover.jpg" alt="Trustin Digital Escrow project" />
+          <div class="case-tone"></div>
+          <div class="case-grade"></div>
+          <div class="case-fade"></div>
+          <span class="absolute top-4 left-4 z-[3] text-xs uppercase tracking-tight text-white/70 border border-gray-700 rounded-full px-3 py-1 bg-black/40">Fintech</span>
+        </div>
+        <div class="p-7">
+          <h3 class="text-xl font-medium text-white tracking-tight">Trustin Digital Escrow</h3>
+          <p class="mt-2 text-sm text-white/80 leading-relaxed">A blockchain-powered escrow platform for high-value transactions — governed by documented security gates.</p>
+          <span class="mt-5 inline-flex items-center gap-1.5 text-sm text-white/80 group-hover:text-white transition-colors">Know more <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section>
+    <div class="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-16 lg:py-24">
+      <div class="reveal relative overflow-hidden rounded-3xl border border-gray-700/30 bg-[#4FA8FF]/[0.04] px-6 md:px-16 py-16 md:py-24 text-center" data-cta>
+        <div class="cta-aurora" aria-hidden="true">
+          <div class="cta-parallax" data-cta-parallax>
+            <div class="cta-glow"></div>
+            <div class="cta-orb-wrap">
+              <div class="cta-orb-soft"></div>
+              <div class="cta-orb"></div>
+              <div class="cta-streaks"></div>
+              <div class="cta-sweep"></div>
+            </div>
+          </div>
+        </div>
+        <div class="relative z-10">
+          <h2 class="text-4xl md:text-6xl font-medium tracking-tighter text-white" style="line-height:0.9;">Talk to us about<br /><span class="shiny-text">AI Code Governance &amp; Audits.</span></h2>
+          <a href="#contact" class="group mt-10 inline-flex items-center gap-2 rounded-full bg-white text-accent px-8 py-4 text-sm font-medium hover:bg-white/90 transition-colors duration-300">
+            Get in Touch
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="border-t border-gray-800/60">
+  <div class="max-w-7xl mx-auto px-6 md:px-8 py-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8">
+      <div class="col-span-2 md:col-span-1">
+        <a href="./" class="inline-flex items-center transition-opacity duration-300 hover:opacity-80">
+          <img src="assets/loop-logo-v2.png" alt="Loop Methods" class="h-11 w-auto" />
+        </a>
+        <p class="mt-5 text-sm text-white/60 leading-relaxed max-w-xs">Quality, Innovation, Perfection,<br />All in one LOOP.</p>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-tight text-white/50 mb-4">Explore</p>
+        <ul class="flex flex-col gap-3 text-sm">
+          <li><a href="./" class="text-white/80 hover:text-white transition-colors">Home</a></li>
+          <li><a href="about" class="text-white/80 hover:text-white transition-colors">About</a></li>
+          <li><a href="services" class="text-white/80 hover:text-white transition-colors">Services</a></li>
+          <li><a href="projects" class="text-white/80 hover:text-white transition-colors">Case Studies</a></li>
+          <li><a href="career" class="text-white/80 hover:text-white transition-colors">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-tight text-white/50 mb-4">Resources</p>
+        <ul class="flex flex-col gap-3 text-sm">
+          <li><a href="projects" class="text-white/80 hover:text-white transition-colors">Case Studies</a></li>
+          <li><a href="https://recruit-ai-ochre.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-white/80 hover:text-white transition-colors">HYRIX AI</a></li>
+        </ul>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <p class="text-xs uppercase tracking-tight text-white/50 mb-4">Get in touch</p>
+        <address class="not-italic flex flex-col gap-3 text-sm text-white/80">
+          <span class="flex items-start gap-2.5">
+            <svg class="w-4 h-4 mt-0.5 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="leading-relaxed">Dubai, UAE (Al Karama)<br />Noida, India (Sector-127)</span>
+          </span>
+          <a href="tel:+917503596900" class="flex items-center gap-2.5 hover:text-white transition-colors">
+            <svg class="w-4 h-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +91 7503596900
+          </a>
+          <a href="mailto:sales@loopmethods.com" class="flex items-center gap-2.5 hover:text-white transition-colors">
+            <svg class="w-4 h-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+            sales@loopmethods.com
+          </a>
+        </address>
+      </div>
+    </div>
+    <div class="mt-12 pt-8 border-t border-gray-800/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="ft-legal">
+        <p class="text-sm text-white/50">© 2026 Loop Methods. All rights reserved.</p>
+        <nav class="ft-legal-links" aria-label="Legal">
+          <a href="privacy-policy">Privacy Policy</a>
+          <a href="cookie-policy">Cookie Policy</a>
+          <a href="terms-of-service">Terms of Service</a>
+          <button type="button" data-cookie-settings>Cookie Settings</button>
+        </nav>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://www.linkedin.com/company/loopmethods/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM2.4 21h5.16V9.75H2.4V21zM9.9 9.75V21h5.16v-6.2c0-1.64.31-3.22 2.34-3.22 2 0 2.03 1.87 2.03 3.32V21h5.16v-7.03c0-4.47-.97-7.5-6.19-7.5-2.51 0-4.19 1.38-4.88 2.68h-.07V9.75H9.9z"/></svg>
+        </a>
+      </div>
+      <p class="text-sm text-white/50">Your Partner in Enterprise Technology.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/loop.js"></script>
+<script src="assets/consent.js"></script>
+</body>
+</html>

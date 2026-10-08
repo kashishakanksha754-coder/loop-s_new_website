@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Canonical host assumed to be loopmethods.com (from the company email domain).
+     Update every <loc> if the site ships on a different host. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://loopmethods.com/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://loopmethods.com/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://loopmethods.com/services</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://loopmethods.com/projects</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://loopmethods.com/career</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://loopmethods.com/service-ui-ux-design</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://loopmethods.com/service-ai-accelerated-development</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://loopmethods.com/service-mobile-app-development</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://loopmethods.com/service-ai-agents-automation</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://loopmethods.com/service-ai-code-governance-audits</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://loopmethods.com/service-seo-cro</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://loopmethods.com/service-cloud-devops</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://loopmethods.com/service-managed-support-maintenance</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://loopmethods.com/service-dedicated-team-pods</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://loopmethods.com/privacy-policy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://loopmethods.com/terms-of-service</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://loopmethods.com/cookie-policy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+</urlset>
