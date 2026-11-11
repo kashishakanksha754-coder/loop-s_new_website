@@ -485,7 +485,6 @@
             '<p class="gt-form-note hidden" data-gt-success style="color:#34d399;">Thanks \u2014 your message is on its way.</p>' +
           '</form>' +
           '<div class="gt-offices">' +
-            '<div class="gt-office"><span class="gt-office-pin">' + pinSvg + '</span><div><p class="text-sm font-semibold text-white">Dubai, UAE</p><p class="text-xs text-white/55">Al Karama</p></div></div>' +
             '<div class="gt-office"><span class="gt-office-pin">' + pinSvg + '</span><div><p class="text-sm font-semibold text-white">Noida, India</p><p class="text-xs text-white/55">Sector-127</p></div></div>' +
           '</div>' +
         '</div>' +
