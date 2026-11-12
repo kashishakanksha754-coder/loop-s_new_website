@@ -615,6 +615,7 @@
             '<div class="mt-6" data-cd-block="solution"><p class="cd-label">Solution</p><p class="cd-text" data-cd-solution></p></div>' +
             '<div class="mt-6" data-cd-block="offers"><p class="cd-label">What It Offers</p><div class="cd-offers mt-2" data-cd-offers></div></div>' +
             '<div class="mt-6" data-cd-block="result"><p class="cd-label">Result</p><p class="cd-text" data-cd-result></p></div>' +
+            '<div class="mt-8 hidden" data-cd-block="link"><a data-cd-link href="#" class="inline-flex items-center gap-2 rounded-full bg-accent text-white px-5 py-2.5 text-sm font-medium hover:brightness-110 transition-all duration-300">View full case study ' + checkSvg.replace('M20 6 9 17l-5-5', 'M5 12h14M13 6l6 6-6 6') + '</a></div>' +
           '</div>' +
         '</div>' +
       '</div>');
@@ -630,6 +631,7 @@
     var solutionEl = modal.querySelector('[data-cd-solution]');
     var offersEl = modal.querySelector('[data-cd-offers]');
     var resultEl = modal.querySelector('[data-cd-result]');
+    var linkEl = modal.querySelector('[data-cd-link]');
     var reduceM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var lastFocused = null;
 
@@ -664,6 +666,9 @@
 
       resultEl.textContent = d.result || '';
       setBlock('result', !!d.result);
+
+      if (d.url) { linkEl.setAttribute('href', d.url); }
+      setBlock('link', !!d.url);
 
       // Grow-from-source: bias the panel's transform-origin toward the clicked card.
       if (!reduceM) {
