@@ -468,9 +468,9 @@
             '</div></div>' +
             '<div class="ct-card hyrix p-5"><div class="relative flex items-center gap-4">' +
               '<div class="ct-icon-wrap shrink-0"><span class="ct-icon-glow" aria-hidden="true"></span><span class="ct-icon-ring-outer" aria-hidden="true"></span><span class="ct-icon-ring-mid" aria-hidden="true"></span><span class="ct-icon">' + sparkSvg + '</span></div>' +
-              '<div class="min-w-0"><p class="text-xs uppercase tracking-widest font-medium" style="color:#e879f9;">HYRIX AI</p>' +
+              '<div class="min-w-0"><p class="text-xs uppercase tracking-widest font-medium" style="color:#e879f9;">HYRIXAI</p>' +
               '<div class="mt-2.5 flex flex-col gap-2"><a href="mailto:info@hyrixai.com" class="ct-link-row">' + mailSvg + 'info@hyrixai.com</a>' +
-              '<a href="https://recruit-ai-ochre.vercel.app/" target="_blank" rel="noopener noreferrer" class="ct-link-row">' + extLinkSvg + 'Visit HYRIX AI</a></div></div>' +
+              '<a href="https://recruit-ai-ochre.vercel.app/" target="_blank" rel="noopener noreferrer" class="ct-link-row">' + extLinkSvg + 'Visit HYRIXAI</a></div></div>' +
             '</div></div>' +
           '</div>' +
           '<form data-gt-form novalidate class="mt-6">' +
