@@ -1,0 +1,72 @@
+/* ============================================================
+   Loop Methods — blog styles (index + articles)
+   Uses the shared dark theme and the #4FA8FF accent from loop.css
+   ============================================================ */
+
+/* ---- Article hero ---- */
+.blog-hero { padding-bottom: 2.5rem; }
+.blog-meta { display: flex; flex-wrap: wrap; gap: 0.35rem 1.25rem; margin-top: 1.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.55); }
+.blog-meta strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+
+/* ---- Article body ---- */
+.blog-article { max-width: 720px; margin-inline: auto; padding-inline: 1.5rem; padding-block: 2.5rem 1rem; }
+@media (min-width: 768px) { .blog-article { padding-block: 3.5rem 1.5rem; } }
+.blog-article > * + * { margin-top: 1.25rem; }
+.blog-article p, .blog-article li { font-size: 1.02rem; line-height: 1.8; color: rgba(255,255,255,0.78); }
+.blog-article h2 { margin-top: 3rem; font-size: 1.5rem; line-height: 1.3; font-weight: 500; letter-spacing: -0.01em; color: #fff; }
+@media (min-width: 768px) { .blog-article h2 { font-size: 1.75rem; } }
+.blog-article h3 { margin-top: 2rem; font-size: 1.15rem; font-weight: 500; color: #fff; }
+.blog-article a { color: #fff; text-decoration: underline; text-decoration-color: rgba(79,168,255,0.6); text-underline-offset: 4px; transition: text-decoration-color 0.2s; }
+.blog-article a:hover { text-decoration-color: #4FA8FF; }
+.blog-article strong { color: #fff; font-weight: 500; }
+.blog-article ul, .blog-article ol { padding-left: 1.25rem; }
+.blog-article ul { list-style: disc; }
+.blog-article ol { list-style: decimal; }
+.blog-article li + li { margin-top: 0.6rem; }
+.blog-article li::marker { color: #4FA8FF; }
+
+/* Answer-first summary block under the title */
+.blog-summary { border-left: 2px solid #4FA8FF; background: rgba(79,168,255,0.06); border-radius: 0 12px 12px 0; padding: 1.1rem 1.3rem; }
+.blog-summary p { font-size: 1.05rem; color: rgba(255,255,255,0.88); margin: 0; }
+
+/* Table of contents */
+.blog-toc { border: 1px solid rgba(255,255,255,0.1); background: #0a0a0a; border-radius: 16px; padding: 1.25rem 1.5rem; }
+.blog-toc p { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.6); margin: 0 0 0.75rem; }
+.blog-toc ol { margin: 0; }
+.blog-toc li { font-size: 0.95rem; line-height: 1.5; }
+.blog-toc a { text-decoration: none; color: rgba(255,255,255,0.8); }
+.blog-toc a:hover { color: #fff; text-decoration: underline; }
+
+/* Compact "fact" callout */
+.blog-callout { border: 1px solid rgba(79,168,255,0.25); background: rgba(79,168,255,0.05); border-radius: 14px; padding: 1.1rem 1.3rem; }
+.blog-callout p { margin: 0; font-size: 0.95rem; }
+
+/* FAQ */
+.blog-faq { margin-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.1); }
+.blog-faq details { border-bottom: 1px solid rgba(255,255,255,0.1); padding-block: 1.1rem; }
+.blog-faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 1rem; font-size: 1.02rem; font-weight: 500; color: #fff; }
+.blog-faq summary::-webkit-details-marker { display: none; }
+.blog-faq summary::after { content: "+"; color: #4FA8FF; font-size: 1.3rem; line-height: 1; }
+.blog-faq details[open] summary::after { content: "\2212"; }
+.blog-faq details p { margin-top: 0.8rem; }
+
+/* Author box */
+.blog-author { margin-top: 3rem; border: 1px solid rgba(255,255,255,0.1); background: #0a0a0a; border-radius: 16px; padding: 1.4rem 1.5rem; }
+.blog-author p { margin: 0; font-size: 0.92rem; line-height: 1.7; }
+.blog-author p + p { margin-top: 0.4rem; }
+
+/* Related links under article */
+.blog-related { max-width: 720px; margin-inline: auto; padding-inline: 1.5rem; padding-block: 1rem 3rem; }
+.blog-related .grid a { display: block; }
+
+/* ---- Blog index ---- */
+.blog-card { display: grid; gap: 0; border: 1px solid #1f1f1f; background: #0a0a0a; border-radius: 20px; overflow: hidden; transition: border-color 0.25s; }
+.blog-card:hover { border-color: #4b5563; }
+@media (min-width: 768px) { .blog-card { grid-template-columns: 0.9fr 1.1fr; } }
+.blog-card img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 16/10; display: block; }
+.blog-card-body { padding: 1.75rem; display: flex; flex-direction: column; justify-content: center; }
+@media (min-width: 768px) { .blog-card-body { padding: 2.25rem; } }
+.blog-card-tag { display: inline-block; align-self: flex-start; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.7); border: 1px solid #374151; border-radius: 9999px; padding: 0.2rem 0.7rem; }
+.blog-card h2 { margin-top: 1rem; font-size: 1.4rem; line-height: 1.3; font-weight: 500; color: #fff; }
+.blog-card p { margin-top: 0.8rem; font-size: 0.95rem; line-height: 1.7; color: rgba(255,255,255,0.7); }
+.blog-card-meta { margin-top: 1.25rem; font-size: 0.8rem; color: rgba(255,255,255,0.5); }

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050608">
+<style>html{background:#050608;color-scheme:dark}body{background:#050608}[data-hero-video],.abt-hero video{background:#050608}@view-transition{navigation:auto}::view-transition-group(root){background:#050608}::view-transition-old(root),::view-transition-new(root){animation-duration:200ms;animation-timing-function:ease-out}@media (prefers-reduced-motion:reduce){@view-transition{navigation:none}::view-transition-old(root),::view-transition-new(root){animation:none}}</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How AI Voice Interview Software Works | Loop Methods</title>
+<meta name="description" content="How an AI voice interview platform works: the speech-to-text, LLM and voice pipeline, rubric scoring, human review, and what to decide before you build one." />
+<link rel="canonical" href="https://loopmethods.com/blog-ai-voice-interview-platform" />
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "@id": "https://loopmethods.com/blog-ai-voice-interview-platform#article", "mainEntityOfPage": "https://loopmethods.com/blog-ai-voice-interview-platform", "headline": "How AI Voice Interview Software Works", "description": "How an AI voice interview platform works: the speech-to-text, LLM and voice pipeline, rubric scoring, human review, and what to decide before you build one.", "image": "https://loopmethods.com/assets/hyrix-cover.jpg", "datePublished": "2026-11-14", "dateModified": "2026-11-14", "inLanguage": "en", "author": {"@type": "Person", "name": "Aadil Raza", "jobTitle": "Business Analyst & Project Coordinator", "worksFor": {"@id": "https://loopmethods.com/#org"}}, "publisher": {"@id": "https://loopmethods.com/#org"}, "isPartOf": {"@id": "https://loopmethods.com/#site"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://loopmethods.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://loopmethods.com/blog"}, {"@type": "ListItem", "position": 3, "name": "How AI Voice Interview Software Works", "item": "https://loopmethods.com/blog-ai-voice-interview-platform"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is an AI voice interview?", "acceptedAnswer": {"@type": "Answer", "text": "It is a spoken interview run by an AI agent instead of a person. The agent asks questions, listens to the answers, can ask follow-ups, and produces a transcript and a score against criteria the recruiter set."}}, {"@type": "Question", "name": "Can AI voice interviews replace recruiters?", "acceptedAnswer": {"@type": "Answer", "text": "No. They take over the repetitive first-round screening so recruiters can spend time on the shortlist. Hiring decisions should stay with people, and in several regions the law expects that."}}, {"@type": "Question", "name": "What should I check before using one on real candidates?", "acceptedAnswer": {"@type": "Answer", "text": "Tell candidates it is an AI interview, be clear about what is recorded and for how long it is kept, test the system on real audio from your market, review the scoring for bias, and give candidates a way to reach a human."}}, {"@type": "Question", "name": "Can Loop Methods build an AI interview platform for us?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We built HYRIXAI, an AI-native recruiting platform with voice pre-screening and interviews. If you are planning something similar, get in touch and we will talk through scope and approach."}}]}]}
+</script>
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Loop Methods" />
+<meta property="og:title" content="How AI Voice Interview Software Works | Loop Methods" />
+<meta property="og:description" content="How an AI voice interview platform works: the speech-to-text, LLM and voice pipeline, rubric scoring, human review, and what to decide before you build one." />
+<meta property="og:url" content="https://loopmethods.com/blog-ai-voice-interview-platform" />
+<meta property="og:image" content="https://loopmethods.com/assets/hyrix-cover.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="How AI Voice Interview Software Works | Loop Methods" />
+<meta name="twitter:description" content="How an AI voice interview platform works: the speech-to-text, LLM and voice pipeline, rubric scoring, human review, and what to decide before you build one." />
+<meta name="twitter:image" content="https://loopmethods.com/assets/hyrix-cover.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/tailwind.css" />
+<link rel="stylesheet" href="assets/loop.css" />
+<link rel="stylesheet" href="assets/blog.css" />
+<link rel="stylesheet" href="assets/consent.css" />
+<!-- Google tag (GA4) - loads only after analytics consent (see assets/consent.js) -->
+<script type="text/plain" data-consent="analytics">
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=GTM-M72PBH6G';document.head.appendChild(s);})();
+</script>
+</head>
+<body class="font-sans text-white/80 antialiased bg-black">
+
+<header class="sticky top-0 z-50 border-b border-gray-800/60 bg-black/70 backdrop-blur-xl">
+  <div class="max-w-7xl mx-auto px-6 md:px-8 h-16 flex items-center justify-between gap-4">
+    <a href="./" class="flex items-center shrink-0 transition-opacity duration-300 hover:opacity-80">
+      <img src="assets/loop-logo-v2.png" alt="Loop Methods" class="h-8 md:h-9 w-auto" />
+    </a>
+    <nav class="hidden lg:flex items-center gap-1 rounded-full border border-gray-700 px-2 py-1.5">
+      <a href="./" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Home</a>
+      <a href="about" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">About</a>
+      <a href="services" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Services</a>
+      <a href="projects" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Case Studies</a>
+      <a href="career" class="px-4 py-1.5 rounded-full text-sm text-white/80 hover:text-white transition-colors duration-200">Career</a>
+    </nav>
+    <a href="#contact" class="hidden lg:inline-flex group items-center gap-2 rounded-full bg-accent text-white px-5 py-2.5 text-sm font-medium hover:brightness-110 transition-all duration-300 shrink-0">
+      Get in Touch
+      <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <button data-menu-toggle aria-expanded="false" aria-label="Open menu" class="lg:hidden grid place-items-center w-10 h-10 rounded-full border border-gray-700 text-white/80 hover:text-white transition-colors">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div data-mobile-menu class="mobile-menu lg:hidden border-t border-gray-800/60 bg-black/95 backdrop-blur-xl">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex flex-col">
+      <a href="./" class="py-3 text-base text-white/80 hover:text-white border-b border-gray-800/60 transition-colors">Home</a>
+      <a href="about" class="py-3 text-base text-white/80 hover:text-white border-b border-gray-800/60 transition-colors">About</a>
+      <a href="services" class="py-3 text-base text-white/80 hover:text-white border-b border-gray-800/60 transition-colors">Services</a>
+      <a href="projects" class="py-3 text-base text-white/80 hover:text-white border-b border-gray-800/60 transition-colors">Case Studies</a>
+      <a href="career" class="py-3 text-base text-white/80 hover:text-white border-b border-gray-800/60 transition-colors">Career</a>
+      <a href="#contact" class="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-accent text-white px-5 py-3 text-sm font-medium">Get in Touch</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="dtl-section dtl-hero blog-hero relative overflow-hidden">
+    <div class="page-hero-glow" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute inset-0 z-0">
+      <div class="absolute -top-48 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full" style="background: radial-gradient(circle, rgba(79,168,255,0.10) 0%, transparent 60%);"></div>
+      <div class="absolute inset-0" style="background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px); background-size: 64px 64px; mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 20%, transparent 80%); -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 20%, transparent 80%);"></div>
+    </div>
+    <div class="dtl-wrap relative z-10">
+      <nav class="reveal text-sm text-white/50 mb-8" aria-label="Breadcrumb">
+        <a href="blog" class="hover:text-white transition-colors">Blog</a>
+        <span class="mx-2 text-gray-700">/</span>
+        <span class="text-white/70">AI voice interviews</span>
+      </nav>
+      <div class="max-w-3xl reveal">
+        <span class="inline-block text-xs uppercase tracking-tight text-white/70 border border-gray-700 rounded-full px-3 py-1 bg-black/40">AI &amp; HR Tech</span>
+        <h1 class="mt-5 text-3xl md:text-5xl font-medium tracking-tight text-white">How AI Voice Interview Software Works</h1>
+        <div class="blog-meta">
+          <span>By <strong>Aadil Raza</strong></span>
+          <span>Reviewed by <strong>Akshay</strong>, Tech Lead</span>
+          <span><time datetime="2026-11-14">14 Nov 2026</time></span>
+          <span>6 min read</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dtl-divider"></div>
+
+  <article class="blog-article">
+
+<div class="blog-summary"><p>An AI voice interview platform holds a spoken conversation with a candidate, asks structured questions, listens in real time and scores the answers against a rubric the recruiter defined. The hard part is not the voice. It is turning a free-flowing conversation into a score a recruiter can check and defend. This guide explains how the pieces fit together, based on what we built for HYRIXAI, and what to decide before you build your own.</p></div>
+
+<nav class="blog-toc" aria-label="Table of contents">
+  <p>In this guide</p>
+  <ol>
+    <li><a href="#pipeline">The pipeline behind one interview</a></li><li><a href="#scoring">From conversation to scorecard</a></li><li><a href="#around-the-call">What sits around the call</a></li><li><a href="#human-control">Keeping humans in control</a></li><li><a href="#before-you-build">Decisions to make before you build</a></li><li><a href="#stack">The stack we used for HYRIXAI</a></li><li><a href="#faq">FAQ</a></li>
+  </ol>
+</nav>
+
+<h2 id="pipeline">The pipeline behind one interview</h2>
+<p>Every spoken turn in the interview goes through the same loop:</p>
+<ol>
+  <li><strong>Speech to text.</strong> The candidate's audio is transcribed as they speak.</li>
+  <li><strong>Reasoning.</strong> A language model reads the transcript so far, the question plan for the role and the scoring rubric, then decides what to say next: ask a follow-up, move to the next question, or close the interview.</li>
+  <li><strong>Text to speech.</strong> The reply is spoken back in a natural-sounding voice.</li>
+</ol>
+<p>Around that loop sits an orchestration layer. It handles the phone or web audio, works out when the candidate has finished speaking, and lets them interrupt. In HYRIXAI this live-call layer is handled by Vapi, with OpenAI models on the language side, so our own services can focus on interview logic instead of audio plumbing.</p>
+<p>Latency is the thing candidates notice first. If the agent takes more than a second or two to answer, people stop sure whether they were heard. Streaming transcription, short model replies and a voice provider with servers near your candidates all help.</p>
+
+<h2 id="scoring">From conversation to scorecard</h2>
+<p>A transcript is not a score. Three design choices decide whether the scores are usable:</p>
+<ul>
+  <li><strong>Fix the competencies first.</strong> Define a handful of competencies per role, such as problem solving or communication, and write down what a weak, acceptable and strong answer looks like. HYRIXAI scores voice interviews against a competency scorecard.</li>
+  <li><strong>Ask structured questions.</strong> Keep the core questions the same for every candidate so results can be compared. Follow-ups can vary, the core cannot.</li>
+  <li><strong>Make scores checkable.</strong> We recommend tying each score to the part of the transcript that supports it. A recruiter can then verify a score in seconds instead of trusting a number.</li>
+</ul>
+
+<h2 id="around-the-call">What sits around the call</h2>
+<p>The interview is one stage in a hiring process, and a product that only does the call is hard to adopt. In HYRIXAI the call sits inside a wider workflow:</p>
+<ul>
+  <li>AI resume screening before the call, and a short AI voice pre-screen to filter early.</li>
+  <li>Skill assessments with multiple-choice, text, voice and sandboxed coding questions.</li>
+  <li>Recruiter-curated talent pools with search across candidates and jobs.</li>
+  <li>Offer letters with e-signature, and approval workflows with a review stage.</li>
+  <li>Notifications by in-app message, email, SMS, WhatsApp and push.</li>
+</ul>
+<p>You can see how these fit together in the <a href="case-study-hyrix-ai">HYRIXAI case study</a>.</p>
+
+<h2 id="human-control">Keeping humans in control</h2>
+<p>Hiring is a regulated area, so the human-in-the-loop design is not optional. The EU AI Act lists AI used for recruitment and candidate evaluation among its high-risk uses. New York City's Local Law 144 requires bias audits for automated employment decision tools. In India, the Digital Personal Data Protection Act, 2023 governs how candidate data, including recordings, is processed.</p>
+<p>Our design response in HYRIXAI is a human review step before any automated rejection, plus a tamper-evident audit log of decisions. The AI recommends, the recruiter decides, and there is a record of both.</p>
+<div class="blog-callout"><p>This is a design principle, not legal advice. Check the rules that apply to the countries you hire in with your own counsel.</p></div>
+
+<h2 id="before-you-build">Decisions to make before you build</h2>
+<ul>
+  <li><strong>Build the audio stack or use a voice platform.</strong> Owning speech and telephony rarely pays off at the start. Use a platform and put your effort into interview logic and scoring.</li>
+  <li><strong>Languages and accents.</strong> Test with real candidate audio from your market, not studio samples.</li>
+  <li><strong>Consent and retention.</strong> Tell candidates it is an AI interview, what is recorded and how long it is kept.</li>
+  <li><strong>Fallbacks.</strong> Decide what happens when a call drops, when the audio is poor, or when a candidate asks for a person.</li>
+  <li><strong>Cost per interview.</strong> Voice platforms usually bill per minute of call on top of model usage. Model this before you price the product.</li>
+  <li><strong>How you will measure quality.</strong> Compare AI scores with recruiter judgement on a sample of interviews before you rely on them.</li>
+</ul>
+
+<h2 id="stack">The stack we used for HYRIXAI</h2>
+<p>For reference, this is what sits under the product: React, TypeScript and Tailwind CSS on the front end; Python (FastAPI) microservices behind an API gateway; PostgreSQL, Redis and Kafka; OpenSearch and S3-compatible object storage; Keycloak for login and role-based access; OpenAI models with Vapi for voice calls; Razorpay for payments; and Docker, Kubernetes, Terraform and GitHub Actions for delivery.</p>
+
+<h2 id="faq">FAQ</h2>
+<div class="blog-faq">
+  <details><summary>What is an AI voice interview?</summary><p>It is a spoken interview run by an AI agent instead of a person. The agent asks questions, listens to the answers, can ask follow-ups, and produces a transcript and a score against criteria the recruiter set.</p></details><details><summary>Can AI voice interviews replace recruiters?</summary><p>No. They take over the repetitive first-round screening so recruiters can spend time on the shortlist. Hiring decisions should stay with people, and in several regions the law expects that.</p></details><details><summary>What should I check before using one on real candidates?</summary><p>Tell candidates it is an AI interview, be clear about what is recorded and for how long it is kept, test the system on real audio from your market, review the scoring for bias, and give candidates a way to reach a human.</p></details><details><summary>Can Loop Methods build an AI interview platform for us?</summary><p>Yes. We built HYRIXAI, an AI-native recruiting platform with voice pre-screening and interviews. If you are planning something similar, get in touch and we will talk through scope and approach.</p></details>
+</div>
+
+<div class="blog-author">
+  <p><strong>Written by Aadil Raza</strong>, Business Analyst & Project Coordinator at Loop Methods.</p>
+  <p>Technically reviewed by <strong>Akshay</strong>, Tech Lead at Loop Methods.</p>
+</div>
+
+  </article>
+
+  <section class="blog-related">
+    <p class="dtl-eyebrow">Related</p>
+    <div class="grid sm:grid-cols-2 gap-4">
+      <a href="case-study-hyrix-ai" class="rounded-2xl border border-gray-800 bg-[#0a0a0a] px-6 py-5 text-white/90 hover:text-white hover:border-gray-600 transition-colors">HYRIXAI case study<span class="block mt-1 text-xs text-white/50">See what we built</span></a>
+      <a href="service-ai-agents-automation" class="rounded-2xl border border-gray-800 bg-[#0a0a0a] px-6 py-5 text-white/90 hover:text-white hover:border-gray-600 transition-colors">AI Agents &amp; Automation<span class="block mt-1 text-xs text-white/50">View service</span></a>
+    </div>
+  </section>
+
+    <!-- ================= CTA ================= -->
+  <section>
+    <div class="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-16 lg:py-24">
+      <div class="reveal relative overflow-hidden rounded-3xl border border-gray-700/30 bg-[#4FA8FF]/[0.04] px-6 md:px-16 py-16 md:py-24 text-center" data-cta>
+        <div class="cta-aurora" aria-hidden="true">
+          <div class="cta-parallax" data-cta-parallax>
+            <div class="cta-glow"></div>
+            <div class="cta-orb-wrap">
+              <div class="cta-orb-soft"></div>
+              <div class="cta-orb"></div>
+              <div class="cta-streaks"></div>
+              <div class="cta-sweep"></div>
+            </div>
+          </div>
+        </div>
+        <div class="relative z-10">
+          <h2 class="text-4xl md:text-6xl font-medium tracking-tighter text-white" style="line-height:0.9;">Have a project<br /><span class="shiny-text">like this in mind?</span></h2>
+          <a href="#contact" class="group mt-10 inline-flex items-center gap-2 rounded-full bg-white text-accent px-8 py-4 text-sm font-medium hover:bg-white/90 transition-colors duration-300">
+            Get in Touch
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="border-t border-gray-800/60">
+  <div class="max-w-7xl mx-auto px-6 md:px-8 py-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8">
+      <div class="col-span-2 md:col-span-1">
+        <a href="./" class="inline-flex items-center transition-opacity duration-300 hover:opacity-80">
+          <img src="assets/loop-logo-v2.png" alt="Loop Methods" class="h-11 w-auto" />
+        </a>
+        <p class="mt-5 text-sm text-white/60 leading-relaxed max-w-xs">Quality, Innovation, Perfection,<br />All in one LOOP.</p>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-tight text-white/50 mb-4">Explore</p>
+        <ul class="flex flex-col gap-3 text-sm">
+          <li><a href="./" class="text-white/80 hover:text-white transition-colors">Home</a></li>
+          <li><a href="about" class="text-white/80 hover:text-white transition-colors">About</a></li>
+          <li><a href="services" class="text-white/80 hover:text-white transition-colors">Services</a></li>
+          <li><a href="projects" class="text-white/80 hover:text-white transition-colors">Case Studies</a></li>
+          <li><a href="career" class="text-white/80 hover:text-white transition-colors">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-xs uppercase tracking-tight text-white/50 mb-4">Resources</p>
+        <ul class="flex flex-col gap-3 text-sm">
+          <li><a href="projects" class="text-white/80 hover:text-white transition-colors">Case Studies</a></li>
+          <li><a href="blog" class="text-white/80 hover:text-white transition-colors">Blog</a></li>
+          <li><a href="https://recruit-ai-ochre.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-white/80 hover:text-white transition-colors">HYRIXAI</a></li>
+        </ul>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <p class="text-xs uppercase tracking-tight text-white/50 mb-4">Get in touch</p>
+        <address class="not-italic flex flex-col gap-3 text-sm text-white/80">
+          <span class="flex items-start gap-2.5">
+            <svg class="w-4 h-4 mt-0.5 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="leading-relaxed">Loop IT Methods Pvt Ltd<br>4th Floor, Unit 406, Tower B, Logix Technopark, Sector 127, Noida, Uttar Pradesh 201313</span>
+          </span>
+          <a href="tel:+919811780576" class="flex items-center gap-2.5 hover:text-white transition-colors">
+            <svg class="w-4 h-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +91 98117 80576
+          </a>
+          <a href="mailto:sales@loopmethods.com" class="flex items-center gap-2.5 hover:text-white transition-colors">
+            <svg class="w-4 h-4 shrink-0 text-white/50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+            sales@loopmethods.com
+          </a>
+        </address>
+      </div>
+    </div>
+    <div class="mt-12 pt-8 border-t border-gray-800/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="ft-legal">
+        <p class="text-sm text-white/50">© 2026 Loop Methods. All rights reserved.</p>
+        <nav class="ft-legal-links" aria-label="Legal">
+          <a href="privacy-policy">Privacy Policy</a>
+          <a href="cookie-policy">Cookie Policy</a>
+          <a href="terms-of-service">Terms of Service</a>
+          <button type="button" data-cookie-settings>Cookie Settings</button>
+        </nav>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://www.linkedin.com/company/loopmethods/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM2.4 21h5.16V9.75H2.4V21zM9.9 9.75V21h5.16v-6.2c0-1.64.31-3.22 2.34-3.22 2 0 2.03 1.87 2.03 3.32V21h5.16v-7.03c0-4.47-.97-7.5-6.19-7.5-2.51 0-4.19 1.38-4.88 2.68h-.07V9.75H9.9z"/></svg>
+        </a>
+      </div>
+      <p class="text-sm text-white/50">Your Partner in Enterprise Technology.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/loop.js"></script>
+<script src="assets/consent.js"></script>
+</body>
+</html>
